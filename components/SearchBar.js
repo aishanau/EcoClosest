@@ -29,8 +29,9 @@ export default () => {
 
 const styles = StyleSheet.create({
     container: {
-        width: 300,
+        width: 350,
         borderRadius: 20,
+        margin: 30
     },
     inner: {
         backgroundColor: '#FFD0D0',

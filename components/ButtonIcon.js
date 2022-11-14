@@ -5,19 +5,23 @@ import { StatusBar } from 'expo-status-bar';
 import { Card } from '@rneui/themed';
 import titles from '../index.js';
 
-export default function ButtonIcon({name}) {
+export default function ButtonIcon({title, image}) {
 
     return (
     <TouchableOpacity style={styles.btn}>
         <Card containerStyle={styles.card} wrapperStyle={styles.innerCard}>
           <Image
           source={
-            name.icon
+            // require('../assets/shirticon.png')
+            image
+            // name.icon
           }
          />
         <View>
           <Text style={styles.title}>
-            {name.name}
+            {/* {name.name} */}
+            {/* Name */}
+            {title}
           </Text>
         </View>
         </Card>
@@ -31,16 +35,15 @@ const styles = StyleSheet.create({
     card: {
       border: '10px',
       borderColor: '#FFD0D0',
-      borderRadius: 20,
-      backgroundColor: '#FFD0D0'
-
+      borderRadius: 30,
+      backgroundColor: '#FFD0D0',
     },
     innerCard: {
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: '#FFD0D0'
+      backgroundColor: '#FFD0D0',
     },
     title: { 
       margin: 10, 

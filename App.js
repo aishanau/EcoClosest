@@ -1,18 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
-import ItemCard from './components/ItemCard';
-import ButtonIcon from './components/ButtonIcon';
-import SearchBar from './components/SearchBar';
+import BrowsePage from './pages/BrowsePage'
 
 import titles from './index.js';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      {/* <ItemCard /> */}
-      {/* <ButtonIcon name={titles.shirt}/> */}
-      <SearchBar />
+      <BrowsePage />
     </View>
   );
 }
