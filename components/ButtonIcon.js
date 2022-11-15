@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     title: { 
       margin: 10, 
       color: '#FB5C5C', 
-      fontSize: '18px',
+      fontSize: '14px',
       fontWeight: 'large'
     },
     price: { 

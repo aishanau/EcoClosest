@@ -8,7 +8,15 @@ import SearchBar from '../components/SearchBar';
 
 import { Button, ButtonGroup, withTheme } from '@rneui/themed';
 
-import titles from '../index.js';
+// import titles from '../index.js';
+import database from '../index.js';
+
+const titles = {
+  shirt: {
+      name: "Shirt",
+      icon: require('../assets/shirticon.png')
+  }
+};
 
 export default function BrowsePage() {
     const [category, setCategory] = useState([ 
@@ -17,6 +25,8 @@ export default function BrowsePage() {
         {title: titles.shirt.name, image: titles.shirt.icon },
         {title: titles.shirt.name, image: titles.shirt.icon },
     ]);
+
+    const [saleItems, setSaleItems] = useState(database.pants);
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -59,26 +69,39 @@ export default function BrowsePage() {
         <Text style={styles.title}>
             On Sale
         </Text>
-        {/* <View style={styles.album2}>
+        <View style={styles.album2}>
             <ScrollView
             horizontal={true}
             >
-            {category.map(({ title, image }, idx) => (
+            {saleItems.map((item, idx) => (
                 <ItemCard
                 key={idx}
-                // onPress={() =>
-                //     navigation.navigate("Details", {
-                //     title,
-                //     text,
-                //     image,
-                    // })
-                // }
+                name={item.name}
+                price={item.price}
+                icon={item.icon}
                 />
       ))}
             </ScrollView>
-        </View> */}
-      {/* <ItemCard /> */}
-      {/* <ButtonIcon name={titles.shirt}/> */}
+        </View>
+
+        <Text style={styles.title}>
+            Recommended For You
+        </Text>
+        <View style={styles.album2}>
+            <ScrollView
+            horizontal={true}
+            >
+            {saleItems.map((item, idx) => (
+                <ItemCard
+                key={idx}
+                name={item.name}
+                price={item.price}
+                icon={item.icon}
+                />
+      ))}
+            </ScrollView>
+        </View>
+
     </View>
     </ScrollView>
 
@@ -106,7 +129,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignContent: 'space-evenly',
-    marginBottom: 10
+    marginBottom: 20
   },
   header: {
     margin: 5,
