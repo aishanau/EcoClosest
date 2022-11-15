@@ -84,6 +84,7 @@ export default function SetLimitPage({setModalVisible, modalVisible}) {
 
         </View>
         </View>
+
     </Modal>
 
   );
