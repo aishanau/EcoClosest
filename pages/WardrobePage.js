@@ -3,11 +3,9 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import { Tab, TabView } from "@rneui/themed";
 import ClothesTab from "../components/ClothesTab";
 import OutfitsTab from "../components/OutfitsTab";
 import { PRIMARY_COLOUR, SECONDARY_COLOUR } from "../styles";
@@ -15,13 +13,7 @@ import { PRIMARY_COLOUR, SECONDARY_COLOUR } from "../styles";
 const screenWidth = Dimensions.get("window").width;
 
 const WardrobePage = () => {
-  const [index, setIndex] = useState(0);
-
   const [isClothesTabActive, setIsClothesTabActive] = useState(true);
-
-  useEffect(() => {
-    console.log("the value of the index is ", index);
-  }, [index]);
 
   return (
     <>
@@ -43,17 +35,7 @@ const WardrobePage = () => {
         }}
       >
         <TouchableOpacity
-          style={{
-            height: 50,
-            backgroundColor: isClothesTabActive
-              ? PRIMARY_COLOUR
-              : SECONDARY_COLOUR,
-            borderTopRightRadius: isClothesTabActive ? 30 : 0,
-            width: screenWidth * 0.5,
-            justifyContent: "center",
-            alignItems: "center",
-            display: "inline",
-          }}
+          style={styles.leftTab}
           onPress={() => setIsClothesTabActive(true)}
         >
           <Text
@@ -66,17 +48,7 @@ const WardrobePage = () => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={{
-            height: 50,
-            backgroundColor: !isClothesTabActive
-              ? PRIMARY_COLOUR
-              : SECONDARY_COLOUR,
-            borderTopLeftRadius: !isClothesTabActive ? 30 : 0,
-            width: screenWidth * 0.5,
-            justifyContent: "center",
-            alignItems: "center",
-            display: "inline",
-          }}
+          style={styles.rightTab}
           onPress={() => setIsClothesTabActive(false)}
         >
           <Text
@@ -97,11 +69,28 @@ const WardrobePage = () => {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     backgroundColor: "white",
     paddingTop: 10,
     border: 0,
     width: screenWidth,
+  },
+  leftTab: {
+    height: 50,
+    backgroundColor: isClothesTabActive ? PRIMARY_COLOUR : SECONDARY_COLOUR,
+    borderTopRightRadius: isClothesTabActive ? 30 : 0,
+    width: screenWidth * 0.5,
+    justifyContent: "center",
+    alignItems: "center",
+    display: "inline",
+  },
+  rightTab: {
+    height: 50,
+    backgroundColor: !isClothesTabActive ? PRIMARY_COLOUR : SECONDARY_COLOUR,
+    borderTopLeftRadius: !isClothesTabActive ? 30 : 0,
+    width: screenWidth * 0.5,
+    justifyContent: "center",
+    alignItems: "center",
+    display: "inline",
   },
   header: {
     padding: 20,
