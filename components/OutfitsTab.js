@@ -41,13 +41,6 @@ const styles = StyleSheet.create({
     alignContent: "space-evenly",
     marginBottom: 10,
   },
-  album2: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    alignContent: "space-evenly",
-    marginBottom: 20,
-  },
   header: {
     paddingTop: 20,
     fontWeight: "700",
