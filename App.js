@@ -1,14 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
-import BrowsePage from './pages/BrowsePage'
+import BrowsePage from './pages/BrowsePage';
+import AccountPage from './pages/AccountPage';
 
 import titles from './index.js';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <BrowsePage />
+      <AccountPage />
+      {/* <BrowsePage /> */}
     </View>
   );
 }
