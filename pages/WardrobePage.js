@@ -1,53 +1,128 @@
 import React, { useEffect, useState } from "react";
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ScrollView, Saf } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
+import { Tab, TabView } from "@rneui/themed";
+import ClothesTab from "../components/ClothesTab";
+import OutfitsTab from "../components/OutfitsTab";
+import { PRIMARY_COLOUR, SECONDARY_COLOUR } from "../styles";
+
+const screenWidth = Dimensions.get("window").width;
 
 const WardrobePage = () => {
+  const [index, setIndex] = useState(0);
 
+  const [isClothesTabActive, setIsClothesTabActive] = useState(true);
+
+  useEffect(() => {
+    console.log("the value of the index is ", index);
+  }, [index]);
 
   return (
-    <ScrollView style={styles.container}>
-        <Text>this is an empty page</Text>
-    </ScrollView>
+    <>
+      <View
+        style={{
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Text style={styles.header}>Wardrobe</Text>
+      </View>
 
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          backgroundColor: SECONDARY_COLOUR,
+        }}
+      >
+        <TouchableOpacity
+          style={{
+            height: 50,
+            backgroundColor: isClothesTabActive
+              ? PRIMARY_COLOUR
+              : SECONDARY_COLOUR,
+            borderTopRightRadius: isClothesTabActive ? 30 : 0,
+            width: screenWidth * 0.5,
+            justifyContent: "center",
+            alignItems: "center",
+            display: "inline",
+          }}
+          onPress={() => setIsClothesTabActive(true)}
+        >
+          <Text
+            style={
+              isClothesTabActive ? styles.activeTitle : styles.inactiveTitle
+            }
+          >
+            Clothes
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={{
+            height: 50,
+            backgroundColor: !isClothesTabActive
+              ? PRIMARY_COLOUR
+              : SECONDARY_COLOUR,
+            borderTopLeftRadius: !isClothesTabActive ? 30 : 0,
+            width: screenWidth * 0.5,
+            justifyContent: "center",
+            alignItems: "center",
+            display: "inline",
+          }}
+          onPress={() => setIsClothesTabActive(false)}
+        >
+          <Text
+            style={
+              !isClothesTabActive ? styles.activeTitle : styles.inactiveTitle
+            }
+          >
+            Outfits
+          </Text>
+        </TouchableOpacity>
+      </View>
+
+      {isClothesTabActive && <ClothesTab />}
+      {!isClothesTabActive && <OutfitsTab />}
+    </>
   );
-}
-
+};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: "white",
-    padding: 10,
-  },
-  album: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-evenly',
-    alignContent: 'space-evenly',
-    marginBottom: 10
-  },
-  album2: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignContent: 'space-evenly',
-    marginBottom: 20
+    paddingTop: 10,
+    border: 0,
+    width: screenWidth,
   },
   header: {
-    paddingTop: 20,
-    fontWeight: '700',
-    textAlignment: 'center',
-
+    padding: 20,
+    fontWeight: "700",
+    fontSize: 20,
+    letterSpacing: 1,
+    textAlignment: "center",
+    color: "#000",
   },
-  title: {
-    fontColor: '#FB5C5C',
-    fontSize: '20px',
-    fontWeight: '600'
+  activeTitle: {
+    color: "#FFF",
+    fontSize: 13,
+    fontWeight: "700",
+  },
+  inactiveTitle: {
+    color: PRIMARY_COLOUR,
+    fontSize: 13,
+    fontWeight: "700",
   },
   btn: {
-    backgroundColor: '#FFD0D0',
+    backgroundColor: "#FFD0D0",
     borderRadius: 30,
   },
 });
