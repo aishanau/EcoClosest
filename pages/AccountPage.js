@@ -1,28 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ScrollView, Saf, TouchableOpacity } from 'react-native';
-// import { Divider } from 'react-native-elements';
-
+import { StyleSheet, Text, View, ScrollView, Saf, TouchableOpacity, Alert, Modal, Pressable } from 'react-native';
 import { Button, ButtonGroup, withTheme, Divider, Icon } from '@rneui/themed';
 
-export default function BrowsePage() {
+import SetLimitPage from './SetLimitPage';
 
+export default function AccountPage() {
+    const [modalVisible, setModalVisible] = useState(false);
   return (
     <ScrollView style={styles.container}>
     <View style={{ paddingTop: 20, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin: 0 }}>
-        <Button
-            title="Set Limit"
-            buttonStyle={{
-                backgroundColor: '#FB5C5C',
-                borderRadius: 30,
-            }}
-            containerStyle={{
-            width: 250,
-            marginHorizontal: 50,
-            marginVertical: 20,
-            }}
-            titleStyle={{ fontWeight: 'bold', fontSize: 14 }}
-        />
+
+        <SetLimitPage setModalVisible={setModalVisible} modalVisible={modalVisible} />
+
+        <Pressable
+            style={[styles.button, styles.buttonOpen]}
+            onPress={() => setModalVisible(!modalVisible)}
+            >
+            <Text style={styles.textStyle}>Set Limit</Text>
+        </Pressable>
 
         <TouchableOpacity
             style={styles.menu}>
@@ -86,28 +82,6 @@ export default function BrowsePage() {
             />
         </TouchableOpacity>
 
-        {/* <Button
-              title="My Account"
-              titleStyle={{ fontWeight: 'semi-bold', fontSize: 18, color: '#FB5C5C' }}
-              buttonStyle={{
-                borderWidth: 2,
-                borderColor: '#FFD0D0',
-                backgroundColor: 'transparent',
-              }}
-              containerStyle={{
-                width: '100%',
-                marginHorizontal: 50,
-                marginVertical: 10,
-              }}
-              icon={{
-                name: 'arrow-right',
-                type: 'font-awesome',
-                size: 10,
-                color: '#FB5C5C',
-              }}
-              iconRight
-              iconContainerStyle={{ marginLeft: 10, marginRight: -10 }}
-        /> */}
 
         <Button
             title="LOGOUT"
@@ -136,6 +110,7 @@ const styles = StyleSheet.create({
   },
   menu: {
     padding: 5,
+    marginTop: 15,
     borderTopWidth: 2,
     borderTopColor: '#FFD0D0',
     width: '100%',
@@ -152,4 +127,45 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center'
   },
+  centeredView: {
+    flex: 1,
+    marginTop: 22,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "#FFD0D0",
+    borderRadius: 20,
+    padding: 35,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  button: {
+    borderRadius: 30,
+    width: 250,
+    padding: 10,
+    elevation: 2,
+    margin: 5
+  },
+  buttonOpen: {
+    backgroundColor: "#FB5C5C",
+  },
+  buttonClose: {
+    backgroundColor: "#565454",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  modalText: {
+    marginBottom: 15,
+  }
 });
