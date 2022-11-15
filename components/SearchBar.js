@@ -29,7 +29,7 @@ export default () => {
 
 const styles = StyleSheet.create({
     container: {
-        width: 350,
+        width: 300,
         borderRadius: 20,
         margin: 30
     },
