@@ -12,8 +12,12 @@ import { PRIMARY_COLOUR, SECONDARY_COLOUR } from "../styles";
 
 const screenWidth = Dimensions.get("window").width;
 
+
 const WardrobePage = () => {
   const [isClothesTabActive, setIsClothesTabActive] = useState(true);
+
+
+  useEffect(() => { console.log(isClothesTabActive)}, [isClothesTabActive]);
 
   return (
     <>
@@ -25,7 +29,7 @@ const WardrobePage = () => {
         }}
       >
         <Text style={styles.header}>Wardrobe</Text>
-      </View>
+      </View> 
 
       <View
         style={{

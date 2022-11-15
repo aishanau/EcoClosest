@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Card } from "@rneui/themed";
 import { MAIN_TEXT_COLOUR, SECONDARY_COLOUR } from "../styles";
+import React, { useEffect, useState } from "react";
 
 const OutfitCard = ({ outfitName, icon }) => {
   return (
