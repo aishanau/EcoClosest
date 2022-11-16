@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { TouchableOpacity, Text, Image, View, StyleSheet } from "react-native";
-import { PRIMARY_COLOUR, SECONDARY_COLOUR } from "../styles.js";
+import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import { PRIMARY_COLOUR } from "../styles.js";
 
 const PrimaryButton = ({ title, onPress }) => {
   return (

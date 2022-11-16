@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, ScrollView, Dimensions } from "react-native";
-import { outerwear, tops, accessories } from "../database";
+import { StyleSheet, View, ScrollView, Dimensions } from "react-native";
+import { clothingCategories } from "../database";
 import { PRIMARY_COLOUR, SECONDARY_COLOUR } from "../styles";
 import CategoryList from "./CategoryList";
 import PrimaryButton from "./PrimaryButton";
 
 const screenWidth = Dimensions.get("window").width;
-
-const clothingCategories = [
-  { category: "Outerwear", itemList: outerwear },
-  { category: "Tops", itemList: tops },
-  { category: "Accessories", itemList: accessories },
-];
 
 const ClothesTab = () => {
 
