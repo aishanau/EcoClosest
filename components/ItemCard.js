@@ -10,7 +10,7 @@ export default function ItemCard({name, icon, price}) {
     >
         <Card containerStyle={styles.card}>
           <Card.Image
-            style={{ padding: 0, width: 120, height: 120, resizeMode: 'cover' }}
+            style={{ padding: 0, width: 100, height: 100, resizeMode: 'cover' }}
             source={{
               uri: icon
             }}
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   card: {
     border: '10px',
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     fontSize: '14px',
   },
   price: { 
-    fontSize: '16px',
+    fontSize: '14px',
     fontColor: '#D8143A'
   },
 });

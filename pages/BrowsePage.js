@@ -18,7 +18,7 @@ const titles = {
   }
 };
 
-export default function BrowsePage() {
+export default function BrowsePage( {navigation} ) {
     const [category, setCategory] = useState([ 
         {title: titles.shirt.name, image: titles.shirt.icon },
         {title: titles.shirt.name, image: titles.shirt.icon },
@@ -37,7 +37,7 @@ export default function BrowsePage() {
           <Text>
               All Items Are Ethically Sourced
           </Text>
-         <SearchBar />
+         <SearchBar navigation={navigation} val=""/>
         </View>
 
         <Text style={styles.title}>
