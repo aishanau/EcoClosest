@@ -6,24 +6,40 @@ import {
   Dimensions,
   Modal,
   Text,
-  Pressable,
 } from "react-native";
 import { clothingCategories } from "../database";
 import { PRIMARY_COLOUR, SECONDARY_COLOUR } from "../styles";
 import CategoryList from "./CategoryList";
 import PrimaryButton from "./PrimaryButton";
 import SecondaryButton from "./SecondaryButton";
+import * as ImagePicker from 'expo-image-picker';
 
 const screenWidth = Dimensions.get("window").width;
 
 const ClothesTab = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [image, setImage] = useState(null);
 
   const addItemEvent = () => {
     console.log("trigger to add item modal, choose upload or take photo");
     setModalVisible(true);
   };
 
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
   return (
     <>
       <Modal
@@ -44,9 +60,7 @@ const ClothesTab = () => {
               <SecondaryButton
                 containerStyle={styles.modalPrimaryButtonStyle}
                 title={"Upload Image"}
-                onPress={() => {
-                  setModalVisible(false);
-                }}
+                onPress={pickImage}
               />
             </View>
             <View style={{paddingBottom: 10}} >
