@@ -1,49 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, ScrollView, Dimensions } from "react-native";
-import { outerwear, tops, bottoms, accessories } from "../database";
+import { outerwear, tops, accessories } from "../database";
 import { PRIMARY_COLOUR, SECONDARY_COLOUR } from "../styles";
 import CategoryList from "./CategoryList";
-import WardrobeCard from "./WardrobeCard";
+import PrimaryButton from "./PrimaryButton";
 
 const screenWidth = Dimensions.get("window").width;
 
-// const clothingCategories = [
-//   { category: "outerwear", list: outerwear },
-//   { category: "tops", list: tops },
-//   { category: "bottoms", list: bottoms },
-//   { category: "accessories", list: accessories },
-// ];
+const clothingCategories = [
+  { category: "Outerwear", itemList: outerwear },
+  { category: "Tops", itemList: tops },
+  { category: "Accessories", itemList: accessories },
+];
 
 const ClothesTab = () => {
-  useEffect(() => {
-    console.log(
-      "the current clothing categories list is ",
-      clothingCategories[0].itemList
-    );
-  }, []);
 
-  const [clothingCategories, setClothingCategories] = useState([
-    { category: "Outerwear", itemList: outerwear },
-    { category: "Tops", itemList: tops },
-    { category: "Bottoms", itemList: bottoms },
-    { category: "Accessories", itemList: accessories },
-  ]);
-
+  const addItemEvent = () => {
+    console.log("trigger to add item modal, choose upload or take photo");
+  }
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>{clothingCategories[0].category}</Text>
+      <View style={styles.buttonContainer}>
+        <PrimaryButton title={"Add New Item"} onPress={addItemEvent} />
       </View>
-      <View style={styles.album}>
-        <ScrollView horizontal={true}>
-          {clothingCategories[0].itemList.map(({ item, brand, image }, idx) => (
-            <WardrobeCard key={idx} item={item} brand={brand} image={image} />
-          ))}
-        </ScrollView>
-      </View>
-
       {clothingCategories.map((item, idx) => (
-        <CategoryList key={idx} category={item.category} itemList={item.itemList} />
+        <CategoryList
+          key={idx}
+          category={item.category}
+          itemList={item.itemList}
+        />
       ))}
     </ScrollView>
   );
@@ -52,10 +37,15 @@ const ClothesTab = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 10,
+    paddingTop: 20,
     border: 0,
     width: screenWidth,
     backgroundColor: SECONDARY_COLOUR,
+  },
+  buttonContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   album: {
     display: "flex",

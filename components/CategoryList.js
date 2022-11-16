@@ -4,7 +4,6 @@ import { PRIMARY_COLOUR } from "../styles";
 import WardrobeCard from "./WardrobeCard";
 
 const CategoryList = ({ category, itemList }) => {
-  useEffect(() => { console.log("category itemList ", itemList); }, [])
 
   return (
     <>
@@ -40,6 +39,7 @@ const styles = StyleSheet.create({
     color: PRIMARY_COLOUR,
     fontSize: "18px",
     fontWeight: "700",
+    paddingTop: 20,
   },
   titleContainer: {
     paddingLeft: 35,

@@ -38,40 +38,40 @@ export const outerwear = [
   ];
   export const tops = [
     {
-      item: "Baby T-Shirt",
-      brand: "Supre",
+      item: "T-Shirt",
+      brand: "Balmain",
       image:
-        "https://w7.pngwing.com/pngs/392/575/png-transparent-sleeve-t-shirt-blouse-crop-top-short-sleeves-tshirt-white-woman-thumbnail.png",
+        "https://cdn-images.farfetch-contents.com/16/30/83/23/16308323_32892157_600.jpg",
     },
     {
-      item: "Cropped Sweater",
-      brand: "H&M",
+      item: "Sweater",
+      brand: "Reformation",
       image:
-        "https://listimg.pinclipart.com/picdir/s/176-1763411_blue-crop-top-png-clipart.png",
+        "https://i.pinimg.com/originals/77/8b/22/778b2290f8912888a9b74ceeb2abd760.png",
     },
     {
-      item: "Baby T-Shirt",
-      brand: "Supre",
+      item: "T-Shirt",
+      brand: "Balmain",
       image:
-        "https://w7.pngwing.com/pngs/392/575/png-transparent-sleeve-t-shirt-blouse-crop-top-short-sleeves-tshirt-white-woman-thumbnail.png",
+        "https://cdn-images.farfetch-contents.com/16/30/83/23/16308323_32892157_600.jpg",
     },
     {
-      item: "Cropped Sweater",
-      brand: "H&M",
+      item: "Sweater",
+      brand: "Reformation",
       image:
-        "https://listimg.pinclipart.com/picdir/s/176-1763411_blue-crop-top-png-clipart.png",
+        "https://i.pinimg.com/originals/77/8b/22/778b2290f8912888a9b74ceeb2abd760.png",
     },
     {
-      item: "Baby T-Shirt",
-      brand: "Supre",
+      item: "T-Shirt",
+      brand: "Balmain",
       image:
-        "https://w7.pngwing.com/pngs/392/575/png-transparent-sleeve-t-shirt-blouse-crop-top-short-sleeves-tshirt-white-woman-thumbnail.png",
+        "https://cdn-images.farfetch-contents.com/16/30/83/23/16308323_32892157_600.jpg",
     },
     {
-      item: "Cropped Sweater",
-      brand: "H&M",
+      item: "Sweater",
+      brand: "Reformation",
       image:
-        "https://listimg.pinclipart.com/picdir/s/176-1763411_blue-crop-top-png-clipart.png",
+        "https://i.pinimg.com/originals/77/8b/22/778b2290f8912888a9b74ceeb2abd760.png",
     },
   ];
   
