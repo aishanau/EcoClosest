@@ -5,11 +5,12 @@ import BrowsePage from './pages/BrowsePage'
 import UploadItem from './pages/UploadItem'
 import ItemDetails from './pages/ItemDetails';
 import PhotoGallery from './pages/PhotoGallery';
+import ShopItem from './pages/ShopItem';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <ItemDetails />
+      <ShopItem/>
     </View>
   );
 }
