@@ -41,19 +41,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  album: {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-evenly",
-    alignContent: "space-evenly",
-    marginBottom: 10,
-  },
-  header: {
-    paddingTop: 20,
-    fontWeight: "700",
-    textAlignment: "center",
-  },
   title: {
     color: PRIMARY_COLOUR,
     fontSize: "18px",
@@ -61,10 +48,6 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     paddingLeft: 35,
-  },
-  btn: {
-    backgroundColor: SECONDARY_COLOUR,
-    borderRadius: 30,
   },
 });
 

@@ -3,21 +3,21 @@ import { Card } from "@rneui/themed";
 import { MAIN_TEXT_COLOUR, SECONDARY_COLOUR } from "../styles";
 import React, { useEffect, useState } from "react";
 
-const OutfitCard = ({ outfitName, icon }) => {
+const OutfitCard = ({ item, image }) => {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => console.log("this leads to item details page")}
+      onPress={() => console.log("this leads to view outfit page")}
     >
       <Card containerStyle={styles.card}>
         <Card.Image
           style={{ padding: 0, width: 120, height: 120, resizeMode: "cover" }}
           source={{
-            uri: icon,
+            uri: image,
           }}
         />
         <View style={styles.innerCard}>
-          <Text style={styles.title}>{outfitName}</Text>
+          <Text style={styles.item}>{item}</Text>
         </View>
       </Card>
     </TouchableOpacity>
@@ -42,10 +42,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  title: {
-    margin: 10,
-    fontColor: MAIN_TEXT_COLOUR,
-    fontSize: "14px",
+  item: {
+    margin: 5,
+    color: MAIN_TEXT_COLOUR,
+    fontSize: "16px",
+    fontWeight: "700",
   },
 });
 

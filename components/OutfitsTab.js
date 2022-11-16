@@ -1,25 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, ScrollView, Dimensions } from "react-native";
-import { SECONDARY_COLOUR } from "../styles";
+import { PRIMARY_COLOUR, SECONDARY_COLOUR } from "../styles";
+import { outfitsCategoryList } from "../database";
+import OutfitCategoryList from "./OutfitCategoryList";
+import PrimaryButton from "./PrimaryButton";
 
 const screenWidth = Dimensions.get("window").width;
-const screenHeight = Dimensions.get("window").height;
 
 const OutfitsTab = () => {
+  const createOutfitEvent = () => {
+    console.log("trigger to add item modal, choose upload or take photo");
+  }
+
+  // useEffect(()=>{console.log("the outfits category list list is ", outfitsCategoryList[0].list)})
+
   return (
     <ScrollView style={styles.container}>
-      <View
-        style={{
-          paddingTop: 20,
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Text style={styles.header}>this is the outfits tab</Text>
-        <Text>All Items Are Ethically Sourced</Text>
+      <View style={styles.buttonContainer}>
+        <PrimaryButton title={"Create New Outfit"} onPress={createOutfitEvent} />
       </View>
+      {outfitsCategoryList.map((item, idx) => (
+        <OutfitCategoryList
+          key={idx}
+          category={item.category}
+          list={item.list}
+        />
+      ))}
     </ScrollView>
   );
 };
@@ -27,32 +34,23 @@ const OutfitsTab = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: SECONDARY_COLOUR,
-    paddingTop: 10,
+    paddingTop: 20,
     border: 0,
     width: screenWidth,
+    backgroundColor: SECONDARY_COLOUR,
   },
-  album: {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-evenly",
-    alignContent: "space-evenly",
-    marginBottom: 10,
-  },
-  header: {
-    paddingTop: 20,
-    fontWeight: "700",
-    textAlignment: "center",
+  buttonContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
-    fontColor: "#FB5C5C",
-    fontSize: "20px",
-    fontWeight: "600",
+    color: PRIMARY_COLOUR,
+    fontSize: "18px",
+    fontWeight: "700",
   },
-  btn: {
-    backgroundColor: "#FFD0D0",
-    borderRadius: 30,
+  titleContainer: {
+    paddingLeft: 35,
   },
 });
 

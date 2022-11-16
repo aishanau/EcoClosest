@@ -110,9 +110,19 @@ export const clothingCategories = [
 
 export const outfits = outerwear.map((x, idx) => {
   return {
-    "outerwear": x,
-    "tops": tops[idx],
-    "accessories": accessories[idx],
-  }
+    name: "Outfit " + idx,
+    image: tops[idx].image,
+    outerwear: x,
+    tops: tops[idx],
+    accessories: accessories[idx],
+  };
 });
 
+export const outfitCategoryNames = ["Casual", "Party", "Business", "Cocktail"];
+
+export const outfitsCategoryList = outfitCategoryNames.map((x) => {
+  return {
+    category: x,
+    list: outfits,
+  };
+});
