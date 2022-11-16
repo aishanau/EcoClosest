@@ -121,14 +121,9 @@ export default function FilterPage({setModalVisible, modalVisible}) {
                 style={[styles.button, styles.buttonOpen]}
                 onPress={() => setModalVisible(!modalVisible)}
                 >
-                <Text style={styles.textStyle}>Set Limit</Text>
+                <Text style={styles.textStyle}>Sort and Filter</Text>
                 </Pressable>
-                <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={resetLimit}
-                >
-                <Text style={styles.textStyle}>Reset Limit</Text>
-                </Pressable>
+
                 <Pressable
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => setModalVisible(!modalVisible)}

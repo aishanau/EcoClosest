@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
       borderColor: '#FFD0D0',
       borderRadius: 30,
       backgroundColor: '#FFD0D0',
+      width: 145
     },
     innerCard: {
       display: 'flex',

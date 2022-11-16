@@ -11,19 +11,13 @@ import { Button, ButtonGroup, withTheme } from '@rneui/themed';
 // import titles from '../index.js';
 import database from '../index.js';
 
-const titles = {
-  shirt: {
-      name: "Shirt",
-      icon: require('../assets/shirticon.png')
-  }
-};
 
 export default function BrowsePage( {navigation} ) {
     const [category, setCategory] = useState([ 
-        {title: titles.shirt.name, image: titles.shirt.icon },
-        {title: titles.shirt.name, image: titles.shirt.icon },
-        {title: titles.shirt.name, image: titles.shirt.icon },
-        {title: titles.shirt.name, image: titles.shirt.icon },
+        {title: "Shirt", image: require('../assets/shirticon.png') },
+        {title: "Jeans", image: require('../assets/jeansicon.png') },
+        {title: "Sweater", image: require('../assets/sweatericon.png') },
+        {title: "Jackets", image: require('../assets/jacketicon.png') },
     ]);
 
     const [saleItems, setSaleItems] = useState(database.pants);
