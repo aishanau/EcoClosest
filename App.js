@@ -2,13 +2,14 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
 import BrowsePage from './pages/BrowsePage'
-
-import titles from './index.js';
+import UploadItem from './pages/UploadItem'
+import ItemDetails from './pages/ItemDetails';
+import PhotoGallery from './pages/PhotoGallery';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <BrowsePage />
+      <UploadItem />
     </View>
   );
 }
