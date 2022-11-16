@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ScrollView, Saf, FlatList } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Saf, FlatList, TouchableOpacity } from 'react-native';
 
 import ItemCard from '../components/ItemCard';
 import ButtonIcon from '../components/ButtonIcon';
 import SearchBar from '../components/SearchBar';
 
-import { Button, ButtonGroup, withTheme } from '@rneui/themed';
+import { Button, ButtonGroup, withTheme, Icon } from '@rneui/themed';
 
 // import titles from '../index.js';
 import database from '../index.js';
@@ -33,8 +33,17 @@ export default function ResultsPage( {navigation, route} ) {
         <Text>
             Results for {value}
         </Text>
+
         </View>
 
+        <TouchableOpacity style={styles.sortbtn}>
+            <Text style={{color: '#FB5C5C', padding: 5}}>Filter & Sort</Text>
+            <Icon
+            name='options-outline'
+            type='ionicon'
+            color='#FFD0D0'
+            />
+        </TouchableOpacity>
         <FlatList
         data={saleItems}
         style={styles.list}
@@ -61,6 +70,17 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 10,
   },  
+  sortbtn: {
+    // padding: 5,
+    borderWidth: 1,
+    borderColor: '#FB5C5C',
+    marginTop: 5,
+    width: 130,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 20,
+  },
   album2: {
     display: 'flex',
     flexDirection: 'row',
