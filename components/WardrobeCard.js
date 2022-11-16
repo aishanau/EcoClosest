@@ -4,6 +4,7 @@ import { Card } from "@rneui/themed";
 import { MAIN_TEXT_COLOUR, SECONDARY_COLOUR } from "../styles";
 
 const WardrobeCard = ({ item, brand, image }) => {
+  useEffect(() => { console.log("the currrent items are ", item, brand, image); }, [])
   return (
     <TouchableOpacity
       style={styles.container}

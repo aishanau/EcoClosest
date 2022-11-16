@@ -1,38 +1,50 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, ScrollView, Dimensions } from "react-native";
-import { outerwear } from "../database";
-import { SECONDARY_COLOUR } from "../styles";
+import { outerwear, tops, bottoms, accessories } from "../database";
+import { PRIMARY_COLOUR, SECONDARY_COLOUR } from "../styles";
+import CategoryList from "./CategoryList";
 import WardrobeCard from "./WardrobeCard";
 
 const screenWidth = Dimensions.get("window").width;
 
+// const clothingCategories = [
+//   { category: "outerwear", list: outerwear },
+//   { category: "tops", list: tops },
+//   { category: "bottoms", list: bottoms },
+//   { category: "accessories", list: accessories },
+// ];
+
 const ClothesTab = () => {
+  useEffect(() => {
+    console.log(
+      "the current clothing categories list is ",
+      clothingCategories[0].itemList
+    );
+  }, []);
+
+  const [clothingCategories, setClothingCategories] = useState([
+    { category: "Outerwear", itemList: outerwear },
+    { category: "Tops", itemList: tops },
+    { category: "Bottoms", itemList: bottoms },
+    { category: "Accessories", itemList: accessories },
+  ]);
+
   return (
     <ScrollView style={styles.container}>
-      <View
-        style={{
-          paddingTop: 20,
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Text style={styles.header}>this is the clothes tab</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>{clothingCategories[0].category}</Text>
       </View>
-
-      <Text style={styles.title}>Outerwear</Text>
       <View style={styles.album}>
         <ScrollView horizontal={true}>
-          {outerwear.map((item, idx) => (
-             <WardrobeCard
-              key={idx}
-              name={item.item}
-              price={item.brand}
-              icon={item.image}
-            />
+          {clothingCategories[0].itemList.map(({ item, brand, image }, idx) => (
+            <WardrobeCard key={idx} item={item} brand={brand} image={image} />
           ))}
         </ScrollView>
       </View>
+
+      {clothingCategories.map((item, idx) => (
+        <CategoryList key={idx} category={item.category} itemList={item.itemList} />
+      ))}
     </ScrollView>
   );
 };
@@ -59,12 +71,15 @@ const styles = StyleSheet.create({
     textAlignment: "center",
   },
   title: {
-    fontColor: "#FB5C5C",
-    fontSize: "20px",
-    fontWeight: "600",
+    color: PRIMARY_COLOUR,
+    fontSize: "18px",
+    fontWeight: "700",
+  },
+  titleContainer: {
+    paddingLeft: 35,
   },
   btn: {
-    backgroundColor: "#FFD0D0",
+    backgroundColor: SECONDARY_COLOUR,
     borderRadius: 30,
   },
 });
