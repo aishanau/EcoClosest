@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, ScrollView, Saf, FlatList, TouchableOpacity } f
 import ItemCard from '../components/ItemCard';
 import ButtonIcon from '../components/ButtonIcon';
 import SearchBar from '../components/SearchBar';
-
+import FilterPage from './FilterPage';
 import { Button, ButtonGroup, withTheme, Icon } from '@rneui/themed';
 
 // import titles from '../index.js';
@@ -22,6 +22,7 @@ export default function ResultsPage( {navigation, route} ) {
     const {item} = route.params;
     const [value, setValue] = useState(JSON.stringify(item));
     console.log(JSON.stringify(item));
+    const [modalVisible, setModalVisible] = useState(false);
 
 
     const [saleItems, setSaleItems] = useState(database.pants);
@@ -36,7 +37,10 @@ export default function ResultsPage( {navigation, route} ) {
 
         </View>
 
-        <TouchableOpacity style={styles.sortbtn}>
+        <FilterPage setModalVisible={setModalVisible} modalVisible={modalVisible} />
+        <TouchableOpacity 
+        style={styles.sortbtn}
+        onPress={() => setModalVisible(!modalVisible)}>
             <Text style={{color: '#FB5C5C', padding: 5}}>Filter & Sort</Text>
             <Icon
             name='options-outline'
