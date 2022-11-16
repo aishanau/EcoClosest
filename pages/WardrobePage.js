@@ -57,10 +57,6 @@ const WardrobePage = () => {
       fontSize: 13,
       fontWeight: "700",
     },
-    btn: {
-      backgroundColor: SECONDARY_COLOUR,
-      borderRadius: 30,
-    },
   });
 
   return (
@@ -76,6 +72,8 @@ const WardrobePage = () => {
           display: "flex",
           flexDirection: "row",
           backgroundColor: SECONDARY_COLOUR,
+          borderBottomWidth: 3,
+          borderBottomColor: PRIMARY_COLOUR,
         }}
       >
         <TouchableOpacity
