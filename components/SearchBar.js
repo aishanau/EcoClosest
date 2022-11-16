@@ -2,15 +2,15 @@ import * as React from "react";
 import { SearchBar } from "@rneui/base";
 import { View, StyleSheet } from 'react-native';
 
-export default () => {
-  const [value, setValue] = React.useState("");
+export default ({value, setValue}) => {
+  // const [value, setValue] = React.useState("");
   return (
     <View style={styles.container}>
         <SearchBar
         platform="ios"
         containerStyle={styles.inner}
         inputContainerStyle={styles.inner}
-        inputStyle={{fontColor: 'white'}}
+        inputStyle={{fontColor: 'white', fontSize: 15}}
         searchIcon={{color: '#fff'}}
         loadingProps={{}}
         onChangeText={newVal => setValue(newVal)}
@@ -29,14 +29,12 @@ export default () => {
 
 const styles = StyleSheet.create({
     container: {
-        width: 300,
+        width: 340,
         borderRadius: 20,
-        margin: 30
+        margin: 30,
     },
     inner: {
         backgroundColor: '#FFD0D0',
         borderRadius: 30,
     }
-    });
-
-
+});

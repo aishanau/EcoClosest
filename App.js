@@ -9,7 +9,7 @@ import PhotoGallery from './pages/PhotoGallery';
 export default function App() {
   return (
     <View style={styles.container}>
-      <UploadItem />
+      <ItemDetails />
     </View>
   );
 }

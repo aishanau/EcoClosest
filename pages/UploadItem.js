@@ -105,7 +105,6 @@ export default function UploadItem({image}) {
                 <SearchBar style={{alignItems: 'center'}} value={brandSearch} setValue={(value) => {setBrandSearch(value)}}></SearchBar>
               </View>
               <View style={{padding: 0, margin: 0, width: '100%', height: '70%', justifyContent: 'flex-end'}}>
-                {console.log(brandSearch)}
                 {brandSearch == '' ? < SectionList
                   stickySectionHeadersEnabled
                   cont

@@ -9,13 +9,13 @@ import { Button } from '@rneui/themed';
 
 export default function ItemDetails() {
   let details = {
-    'item': '',
-    'image': null,
-    'brand': '',
-    'category': '',
-    'price': '',
-    'colour': [],
-    'fabric': [],
+    item: '',
+    image: null,
+    brand: '',
+    category: '',
+    price: '',
+    colour: [],
+    fabric: [],
   }
 
   const [item, setItem] = useState(details.item);
@@ -32,6 +32,7 @@ export default function ItemDetails() {
   const [categoryModalVisible, setCategoryModalVisible] = useState(false);
   const [colourModalVisible, setColourModalVisible] = useState(false);
   const [fabricModalVisible, setFabricModalVisible] = useState(false);
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
 
   const [view, setView] = useState(true);
 
@@ -65,11 +66,7 @@ export default function ItemDetails() {
   }
 
   const getView = () => {
-    if (view) {
-      return 'visible';
-    } else {
-      return 'hidden';
-    }
+    return view ? 'visible' : 'hidden';
   }
 
   const resetItem = () => {
@@ -80,6 +77,18 @@ export default function ItemDetails() {
     setColour([...details.colour]);
     setFabric([...details.fabric]);
     setImage(details.image);
+  }
+
+  const saveItem = () => {
+    details = {
+      item: item,
+      image: image,
+      brand: brand,
+      category: category,
+      price: price,
+      colour: [...colour],
+      fabric: [...fabric],
+    }
   }
 
   return <ScrollView>
@@ -95,13 +104,13 @@ export default function ItemDetails() {
               </TouchableOpacity>
               <View style={{flexDirection: 'row'}}>
                 <TouchableOpacity onPress={edit} style={{marginRight: 10, backfaceVisibility: getView()}}>
-                  <Icon name="pencil" type="evilicon" size='35'/>x
+                  <Icon name="pencil" type="evilicon" size='35'/>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={remove} style={{visibility: getView()}}>
+                <TouchableOpacity onPress={() => {setDeleteModalVisible(true)}} style={{backfaceVisibility: getView()}}>
                   <Icon name="trash" type="evilicon" size='35'/>
                 </TouchableOpacity>
               </View>
-          </>)
+            </>)
           /* Edit Heading */
           : (<>
               <TouchableOpacity onPress={() => {setView(true); resetItem()}}>
@@ -113,12 +122,40 @@ export default function ItemDetails() {
                     backfaceVisibility: !getView()
                 }}
               >
-                <Text style={styles.btnText}>Save</Text>
+                <Text style={styles.btnText} onPress={() => {setView(true); saveItem()}}>Save</Text>
               </Button>
-            </>)
-          }
+            </>)}
         </View>
         <Text style={styles.heading}>Add Details</Text>
+        {/* DELETE MODAL */}
+        <Modal
+          transparent
+          visible={deleteModalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+            setDeleteModalVisible(!deleteModalVisible);
+          }}
+        >
+          <View style={[styles.modalOverlay, {justifyContent: 'center', margin: 15}]}>
+            <View style={[styles.modalView, {padding: 35, alignItems: 'center'}]}>
+              <Text style={{margin: 10}}>Are you sure you want to delete?</Text>
+              <Button
+                buttonStyle={styles.btn}
+                containerStyle={{margin: 10}}
+                onPress={() => {setDeleteModalVisible(!deleteModalVisible)}}
+              >
+                <Text style={styles.btnText}>Delete</Text>
+              </Button>
+              <Button
+                buttonStyle={[styles.btn, {backgroundColor: 'grey'}]}
+                containerStyle={{margin: 10}}
+                onPress={() => {setDeleteModalVisible(!deleteModalVisible)}}
+              >
+                <Text style={styles.btnText}>Cancel</Text>
+              </Button>
+            </View>
+          </View>
+        </Modal>
       </View>
       <Image
         source={{uri: image}}
@@ -147,7 +184,9 @@ export default function ItemDetails() {
           <ListItem.Chevron />
         </ListItem.Swipeable> */}
         <TouchableOpacity
-          onPress={() => {!view ? setBrandModalVisible(!brandModalVisible) : ''}}>
+          onPress={() => {!view && setBrandModalVisible(!brandModalVisible)}}
+          disabled={view}
+          >
             <Input
               containerStyle={{}}
               inputContainerStyle={{}}
@@ -213,7 +252,9 @@ export default function ItemDetails() {
 
         {/* CATEGORY MODAL */}
         <TouchableOpacity
-          onPress={() => {!view ? setCategoryModalVisible(!categoryModalVisible) : ''}}>
+          onPress={() => {!view && setCategoryModalVisible(!categoryModalVisible)}}
+          disabled={view}
+          >
           <Input
             containerStyle={styles.input}
             inputContainerStyle={{}}
@@ -268,7 +309,9 @@ export default function ItemDetails() {
         />
 
         {/* COLOUR */}
-        <TouchableOpacity onPress={() => {!view ? setColourModalVisible(!colourModalVisible) : ''}}>
+        <TouchableOpacity onPress={() => {!view && setColourModalVisible(!colourModalVisible)}}
+        disabled={view}
+        >
         <Input
           containerStyle={styles.input}
           inputContainerStyle={{}}
@@ -327,7 +370,7 @@ export default function ItemDetails() {
         </Modal>
         
         {/* FABRIC COMPOSITION */}
-        <TouchableOpacity onPress={() => {!view ? setFabricModalVisible(!fabricModalVisible) : ''}}>
+        <TouchableOpacity onPress={() => {!view && setFabricModalVisible(!fabricModalVisible)}} disabled={view}>
           <Input
             containerStyle={styles.input}
             inputContainerStyle={{}}
