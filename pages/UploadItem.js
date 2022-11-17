@@ -38,17 +38,21 @@ export default function UploadItem({navigation, route}) {
     }
   }
 
+  const uploadDetails = () => {
+    // TODO: UPLOAD ITEM TO DATABASE
+  }
+
   return <ScrollView>
-    <View style={{ marginVertical: 70}}>
-      <View style={{paddingHorizontal: 35}}>
+    <View style={{ marginBottom: 40}}>
+      {/* <View style={{paddingHorizontal: 35}}>
         <TouchableOpacity style={{alignSelf: 'flex-start'}}>
           <Icon name="arrowleft" type="antdesign"/>
         </TouchableOpacity>
         <Text style={styles.heading}>Add Details</Text>
-      </View>
+      </View> */}
       <Image
         source={{uri: route.params.image}}
-        containerStyle={{aspectRatio: 1, width: '100%', height: 'auto', backgroundColor: '#ccc', marginVertical: 20}}
+        containerStyle={{aspectRatio: 1, width: '100%', height: 'auto', backgroundColor: '#ccc', marginBottom: 20}}
       />
 
       {/* FORM INPUT */}
@@ -73,6 +77,7 @@ export default function UploadItem({navigation, route}) {
         </ListItem.Swipeable> */}
         <TouchableOpacity
           onPress={() => {setBrandModalVisible(!brandModalVisible)}}>
+            <View>
             <Input
               containerStyle={{}}
               inputContainerStyle={{}}
@@ -82,6 +87,7 @@ export default function UploadItem({navigation, route}) {
               disabledInputStyle={{color: 'black'}}
               value={brand}
             />
+            </View>
         </TouchableOpacity>
 
         <Modal
@@ -139,6 +145,7 @@ export default function UploadItem({navigation, route}) {
         {/* CATEGORY MODAL */}
         <TouchableOpacity
           onPress={() => {setCategoryModalVisible(!categoryModalVisible)}}>
+          <View>
           <Input
             containerStyle={styles.input}
             inputContainerStyle={{}}
@@ -147,6 +154,7 @@ export default function UploadItem({navigation, route}) {
             value={category}
             disabled
           />
+          </View>
         </TouchableOpacity>
         <Modal
           animationType="slide"
@@ -193,6 +201,7 @@ export default function UploadItem({navigation, route}) {
 
         {/* COLOUR */}
         <TouchableOpacity onPress={() => {setColourModalVisible(!colourModalVisible)}}>
+        <View>
         <Input
           containerStyle={styles.input}
           inputContainerStyle={{}}
@@ -202,6 +211,7 @@ export default function UploadItem({navigation, route}) {
           value={colour.toString()}
           disabled
         />
+        </View>
         </TouchableOpacity>
         <Modal
           animationType="slide"
@@ -253,6 +263,7 @@ export default function UploadItem({navigation, route}) {
         
         {/* FABRIC COMPOSITION */}
         <TouchableOpacity onPress={() => {setFabricModalVisible(!fabricModalVisible)}}>
+          <View>
           <Input
             containerStyle={styles.input}
             inputContainerStyle={{}}
@@ -262,6 +273,7 @@ export default function UploadItem({navigation, route}) {
             value={fabric.toString()}
             disabled
           />
+          </View>
         </TouchableOpacity>
         <Modal
           animationType="slide"
@@ -286,7 +298,7 @@ export default function UploadItem({navigation, route}) {
                 <FlatList
                   data={fabricList}
                   renderItem={({item}) => 
-                    <ListItemCheckBox
+                    <ListItem.CheckBox
                       onPress={() => {pressFabricCheckBox(item)}}
                       checked={fabric.includes(item)}
                       title={item}
@@ -310,6 +322,7 @@ export default function UploadItem({navigation, route}) {
         </Modal>
       </View>
       <Button 
+          onPress={uploadDetails}
           buttonStyle={styles.btn}
           containerStyle={{
               marginHorizontal: 20

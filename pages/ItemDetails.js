@@ -7,24 +7,24 @@ import SearchBar from '../components/SearchBar';
 
 import { Button } from '@rneui/themed';
 
-export default function ItemDetails() {
-  let details = {
-    item: '',
-    image: null,
-    brand: '',
-    category: '',
-    price: '',
-    colour: [],
-    fabric: [],
-  }
+export default function ItemDetails({navigation, route}) {
+  // let details = {
+  //   item: '',
+  //   image: null,
+  //   brand: '',
+  //   category: '',
+  //   price: '',
+  //   colour: [],
+  //   fabric: [],
+  // }
 
-  const [item, setItem] = useState(details.item);
-  const [brand, setBrand] = useState(details.brand);
-  const [category, setCategory] = useState(details.category);
-  const [price, setPrice] = useState(details.price);
-  const [colour, setColour] = useState([...details.colour]);
-  const [fabric, setFabric] = useState([...details.fabric]);
-  const [image, setImage] = useState(details.image);
+  const [item, setItem] = useState(route.params.details.item == undefined ? '' : route.params.details.item);
+  const [brand, setBrand] = useState(route.params.details.brand == undefined ? '' : route.params.details.brand);
+  const [category, setCategory] = useState(route.params.details.category == undefined ? '' : route.params.details.category);
+  const [price, setPrice] = useState(route.params.details.price == undefined ? '' : route.params.details.price);
+  const [colour, setColour] = useState(route.params.details.colour == undefined ? [] : [...route.params.details.colour]);
+  const [fabric, setFabric] = useState(route.params.details.fabric == undefined ? [] : [...route.params.details.fabric]);
+  const [image, setImage] = useState(route.params.details.image == undefined ? '' : route.params.details.image);
 
   const [brandModalVisible, setBrandModalVisible] = useState(false);
   const [brandSearch, setBrandSearch] = useState('');
@@ -52,17 +52,17 @@ export default function ItemDetails() {
     }
   }
 
-  const setDetails = (key, value) => {
-    console.log(key, value);
-    details[key] = value;
-    console.log(details);
-  }
+  // const setDetails = (key, value) => {
+  //   console.log(key, value);
+  //   details[key] = value;
+  //   console.log(details);
+  // }
 
   const edit = () => {
     setView(false);
   }
   const remove = () => {
-
+    // TODO: remove item from database
   }
 
   const getView = () => {
@@ -70,46 +70,45 @@ export default function ItemDetails() {
   }
 
   const resetItem = () => {
-    setItem(details.item);
-    setBrand(details.brand);
-    setCategory(details.category);
-    setPrice(details.price);
-    setColour([...details.colour]);
-    setFabric([...details.fabric]);
-    setImage(details.image);
+    setItem(route.params.details.item == undefined ? '' : route.params.details.item);
+    setBrand(route.params.details.brand == undefined ? '' : route.params.details.brand);
+    setCategory(route.params.details.category == undefined ? '' : route.params.details.category);
+    setPrice(route.params.details.price == undefined ? '' : route.params.details.price);
+    setColour(route.params.details.colour == undefined ? [] : [...route.params.details.colour]);
+    setFabric(route.params.details.fabric == undefined ? [] : [...route.params.details.fabric]);
+    setImage(route.params.details.image == undefined ? '' : route.params.details.image);
   }
 
+  // TODO: SAVE ITEM IN DATABASE
   const saveItem = () => {
-    details = {
-      item: item,
-      image: image,
-      brand: brand,
-      category: category,
-      price: price,
-      colour: [...colour],
-      fabric: [...fabric],
-    }
+    // details = {
+    //   item: item,
+    //   image: image,
+    //   brand: brand,
+    //   category: category,
+    //   price: price,
+    //   colour: [...colour],
+    //   fabric: [...fabric],
+    // }
   }
 
   return <ScrollView>
-    <View style={{ marginVertical: 70}}>
+    <View style={{ marginVertical: 20}}>
       <View style={{paddingHorizontal: 35}}>
         
         <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
           {view
           /* View Heading */
           ? (<>
-              <TouchableOpacity>
+              {/* <TouchableOpacity>
                 <Icon name="arrowleft" type="antdesign"/>
+              </TouchableOpacity> */}
+              <TouchableOpacity onPress={() => {setDeleteModalVisible(true)}} style={{backfaceVisibility: getView()}}>
+                <Icon name="trash" type="evilicon" size='35'/>
               </TouchableOpacity>
-              <View style={{flexDirection: 'row'}}>
-                <TouchableOpacity onPress={edit} style={{marginRight: 10, backfaceVisibility: getView()}}>
-                  <Icon name="pencil" type="evilicon" size='35'/>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => {setDeleteModalVisible(true)}} style={{backfaceVisibility: getView()}}>
-                  <Icon name="trash" type="evilicon" size='35'/>
-                </TouchableOpacity>
-              </View>
+              <TouchableOpacity onPress={edit} style={{marginRight: 10, backfaceVisibility: getView()}}>
+                <Icon name="pencil" type="evilicon" size='35'/>
+              </TouchableOpacity>
             </>)
           /* Edit Heading */
           : (<>
@@ -126,7 +125,7 @@ export default function ItemDetails() {
               </Button>
             </>)}
         </View>
-        <Text style={styles.heading}>Add Details</Text>
+        {/* <Text style={styles.heading}>Add Details</Text> */}
         {/* DELETE MODAL */}
         <Modal
           transparent
@@ -187,6 +186,7 @@ export default function ItemDetails() {
           onPress={() => {!view && setBrandModalVisible(!brandModalVisible)}}
           disabled={view}
           >
+            <View>
             <Input
               containerStyle={{}}
               inputContainerStyle={{}}
@@ -196,6 +196,7 @@ export default function ItemDetails() {
               disabledInputStyle={{color: 'black'}}
               value={brand}
             />
+            </View>
         </TouchableOpacity>
 
         <Modal
@@ -255,6 +256,7 @@ export default function ItemDetails() {
           onPress={() => {!view && setCategoryModalVisible(!categoryModalVisible)}}
           disabled={view}
           >
+          <View>
           <Input
             containerStyle={styles.input}
             inputContainerStyle={{}}
@@ -263,6 +265,7 @@ export default function ItemDetails() {
             value={category}
             disabled
           />
+          </View>
         </TouchableOpacity>
         <Modal
           animationType="slide"
@@ -312,6 +315,7 @@ export default function ItemDetails() {
         <TouchableOpacity onPress={() => {!view && setColourModalVisible(!colourModalVisible)}}
         disabled={view}
         >
+        <View>
         <Input
           containerStyle={styles.input}
           inputContainerStyle={{}}
@@ -320,6 +324,7 @@ export default function ItemDetails() {
           value={colour.toString()}
           disabled
         />
+        </View>
         </TouchableOpacity>
         <Modal
           animationType="slide"
@@ -371,6 +376,7 @@ export default function ItemDetails() {
         
         {/* FABRIC COMPOSITION */}
         <TouchableOpacity onPress={() => {!view && setFabricModalVisible(!fabricModalVisible)}} disabled={view}>
+          <View>
           <Input
             containerStyle={styles.input}
             inputContainerStyle={{}}
@@ -379,6 +385,7 @@ export default function ItemDetails() {
             value={fabric.toString()}
             disabled
           />
+          </View>
         </TouchableOpacity>
         <Modal
           animationType="slide"

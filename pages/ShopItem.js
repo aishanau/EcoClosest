@@ -22,15 +22,23 @@ export default function ShopItem() {
 
   const showAlert = () => {
     setAlertVisible(true);
+    setTimeout(() => {
+      setAlertVisible(false);
+    }, 5000);
+    
+  }
+
+  const addToCart = () => {
+    // TODO: Add details to cart database?
   }
 
 
   return <ScrollView>
       {/* IMAGE */}
     <View style={{ marginBottom: 70}}>
-      <TouchableOpacity style={{position: 'absolute', left: 35, top: 70, zIndex: 2}}>
+      {/* <TouchableOpacity style={{position: 'absolute', left: 35, top: 70, zIndex: 2}}>
         <Icon name="arrowleft" type="antdesign"/>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <Image source={{uri: details.icon}} containerStyle={{aspectRatio: 0.8, backgroundColor: '#ccc', width: '100%'}} />
       {/* ITEM INFO */}
       <View style={{ padding: 20}}>
@@ -71,7 +79,7 @@ export default function ShopItem() {
               <Text style={{fontWeight: 'bold', fontSize: 11, marginVertical: 10, textAlign: 'center'}}>SELECT SIZE</Text>
               <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: 15, marginBottom: 30}}>
                 {sizes.map((size, idx) => {
-                  return <TouchableOpacity key={idx} onPress={() => {setSizeModalVisible(false); showAlert();}}>
+                  return <TouchableOpacity key={idx} onPress={() => {setSizeModalVisible(false); addToCart(); showAlert();}}>
                     <View style={{backgroundColor: '#F1F4FB', borderRadius: 6, marginHorizontal: 10, width: 50, aspectRatio: 1, justifyContent: 'center', alignItems: 'center'}}>
                       <Text>{size}</Text>
                     </View>
@@ -89,7 +97,7 @@ export default function ShopItem() {
         >
           <View style={styles.alertOverlay}>
             <View style={styles.alertView}>
-                <Text style={{color: 'white', textAlign: 'center', fontSize: 17}}>Added to Cart!</Text>
+                <Text style={{color: 'white', textAlign: 'center', fontSize: 17, fontWeight: 'bold'}}>Added to Cart</Text>
             </View>
           </View>
         </Modal>
@@ -189,7 +197,8 @@ const styles = StyleSheet.create({
   },
   accordionContent: {
     paddingHorizontal: 25,
-    paddingBottom: 25
+    paddingBottom: 25,
+    backgroundColor: 'white'
   },
   modalOverlay: {
     flex: 1,

@@ -128,6 +128,7 @@ const ClothesTab = ({navigation, route}) => {
 
         {clothingCategories.map((item, idx) => (
           <CategoryList
+            navigation={navigation}
             key={idx}
             category={item.category}
             itemList={item.itemList}

@@ -27,28 +27,28 @@ export default function App() {
         name="Wardrobe"
         component={WardrobePage}
         options={{
-          tabBarIcon: ({ size }) => <MaterialCommunityIcons name="hanger" size={size} color={PRIMARY_COLOUR} />,
+          tabBarIcon: ({ size }) => <MaterialCommunityIcons name="hanger" size={size} color={PRIMARY_COLOUR} style={{marginTop: 10, marginBottom: 3}} />,
         }}
       />
       <Tabs.Screen
         name="Shop"
         component={ShopItem}
         options={{
-          tabBarIcon: ({ size }) => <Ionicons name="md-search" size={size} color={PRIMARY_COLOUR} />,
+          tabBarIcon: ({ size }) => <Ionicons name="md-search" size={size} color={PRIMARY_COLOUR} style={{marginTop: 10, marginBottom: 3}}/>,
         }}
       />
       <Tabs.Screen
         name="Cart"
         component={SamplePage}
         options={{
-          tabBarIcon: ({ size }) => <Ionicons name="md-cart" size={size} color={PRIMARY_COLOUR} />,
+          tabBarIcon: ({ size }) => <Ionicons name="md-cart" size={size} color={PRIMARY_COLOUR} style={{marginTop: 10, marginBottom: 3}}/>,
         }}
       />
       <Tabs.Screen
         name="Account"
         component={SamplePage2}
         options={{
-          tabBarIcon: ({ size }) => <MaterialCommunityIcons name="account" size={size} color={PRIMARY_COLOUR} />,
+          tabBarIcon: ({ size }) => <MaterialCommunityIcons name="account" size={size} color={PRIMARY_COLOUR} style={{marginTop: 10, marginBottom: 3}} />,
         }}
       />
     </Tabs.Navigator>
@@ -69,6 +69,7 @@ export default function App() {
         <RootStack.Screen name="Cart" component={SamplePage} />
         <RootStack.Screen name="Account" component={SamplePage2} />
         <RootStack.Screen name="Upload Item" component={UploadItem} />
+        <RootStack.Screen name="Item Details" component={ItemDetails} />
         <RootStack.Screen name="EcoCloset" component={TabsNav} />
       </RootStack.Navigator>
     </NavigationContainer>
