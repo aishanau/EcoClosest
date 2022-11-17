@@ -12,7 +12,7 @@ import OutfitsTab from "../components/OutfitsTab";
 import { PRIMARY_COLOUR, SECONDARY_COLOUR } from "../styles";
 const screenWidth = Dimensions.get("window").width;
 
-const WardrobePage = ({ route, navigation }) => {
+const WardrobePage = ({navigation, route }) => {
   const [isActive, setIsActive] = useState(true);
 
   useEffect(() => navigation.setOptions({ title : "Wardrobe" }), []);
@@ -87,7 +87,7 @@ const WardrobePage = ({ route, navigation }) => {
         </TouchableOpacity>
       </View>
 
-      {isActive && <ClothesTab />}
+      {isActive && <ClothesTab route={route} navigation={navigation}/>}
       {!isActive && <OutfitsTab />}
     </>
   );

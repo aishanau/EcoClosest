@@ -51,18 +51,21 @@ export default function ResultsPage( {navigation, route} ) {
             />
         </TouchableOpacity>
         <FlatList
-        data={saleItems}
-        style={styles.list}
-        numColumns={2}
-        keyExtractor={(item) => item.name}
-        renderItem={({ item }) => (
+          data={saleItems}
+          style={styles.list}
+          numColumns={2}
+          keyExtractor={(item) => item.name}
+          renderItem={({item}) => (
             <ItemCard
+            navigation={navigation}
+            details={item}
             name={item.name}
             price={item.price}
             icon={item.icon}
             />
-        )}
+          )}
       />
+      {console.log(saleItems)}
 
     </View>
 

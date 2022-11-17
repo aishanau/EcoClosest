@@ -3,23 +3,23 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Card } from "@rneui/themed";
 import { MAIN_TEXT_COLOUR, SECONDARY_COLOUR } from "../styles";
 
-const WardrobeCard = ({ item, brand, image }) => {
+const WardrobeCard = ({ navigation, details }) => {
 
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => console.log("this leads to item details page")}
+      onPress={() => {navigation.navigate("Item Details", {details: details})}}
     >
       <Card containerStyle={styles.card}>
         <Card.Image
           style={{ padding: 0, width: 120, height: 120, resizeMode: "cover" }}
           source={{
-            uri: image,
+            uri: details.image,
           }}
         />
         <View style={styles.innerCard}>
-          <Text style={styles.item}>{item}</Text>
-          <Text style={styles.brand}>{brand}</Text>
+          <Text style={styles.item}>{details.item}</Text>
+          <Text style={styles.brand}>{details.brand}</Text>
         </View>
       </Card>
     </TouchableOpacity>

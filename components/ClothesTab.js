@@ -16,30 +16,70 @@ import * as ImagePicker from 'expo-image-picker';
 
 const screenWidth = Dimensions.get("window").width;
 
-const ClothesTab = () => {
+const ClothesTab = ({navigation, route}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [image, setImage] = useState(null);
-
-  const addItemEvent = () => {
-    console.log("trigger to add item modal, choose upload or take photo");
-    setModalVisible(true);
-  };
+  const [statusCamera, requestPermissionCamera] = ImagePicker.useCameraPermissions();
+  const [statusLib, requestPermissionLib] = ImagePicker.useMediaLibraryPermissions();
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+    
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [3, 3],
+        quality: 1,
+      });
+  
+      console.log(result);
+  
+      if (!result.canceled) {
+        console.log('hello');
+        navigation.navigate('Upload Item', {image: result.assets[0].uri});
+        setModalVisible(false);
+      }
+  };
+
+  const takePhoto = async () => {
+    let result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [4, 3],
+      aspect: [3, 3],
       quality: 1,
     });
 
     console.log(result);
 
     if (!result.canceled) {
-      setImage(result.assets[0].uri);
+      navigation.navigate('Upload Item', {image: result.assets[0].uri});
+      setModalVisible(false);
     }
   };
+
+  const takePhotoPermission = async () => {
+    if (statusCamera == null || !statusCamera.granted) {
+      statusCamera = await requestPermissionCamera();
+    }
+    if (statusCamera != null && statusCamera.granted) {
+      await takePhoto();
+    }
+  }
+
+  const pickImagePermission = async () => {
+    if (statusLib == null || !statusLib.granted) {
+      statusLib = await requestPermissionLib();
+    }
+    if (statusLib != null && statusLib.granted) {
+      await pickImage();
+    }
+  }
+
+  const addItemEvent = () => {
+    console.log("trigger to add item modal, choose upload or take photo");
+    setModalVisible(true);
+  };
+
   return (
     <>
       <Modal
@@ -60,16 +100,14 @@ const ClothesTab = () => {
               <SecondaryButton
                 containerStyle={styles.modalPrimaryButtonStyle}
                 title={"Upload Image"}
-                onPress={pickImage}
+                onPress={pickImagePermission}
               />
             </View>
             <View style={{paddingBottom: 10}} >
               <SecondaryButton
                 containerStyle={styles.modalPrimaryButtonStyle}
                 title={"Take Photo"}
-                onPress={() => {
-                  setModalVisible(false);
-                }}
+                onPress={takePhotoPermission}
               />
             </View>
             <PrimaryButton
@@ -90,6 +128,7 @@ const ClothesTab = () => {
 
         {clothingCategories.map((item, idx) => (
           <CategoryList
+            navigation={navigation}
             key={idx}
             category={item.category}
             itemList={item.itemList}

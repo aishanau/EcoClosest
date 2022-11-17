@@ -66,9 +66,11 @@ export default function CategoryPage( {navigation, route} ) {
                 keyExtractor={(item) => item.name}
                 renderItem={({ item }) => (
                     <ItemCard
-                    name={item.name}
-                    price={item.price}
-                    icon={item.icon}
+                      navigation={navigation}
+                      details={item}
+                    // name={item.name}
+                    // price={item.price}
+                    // icon={item.icon}
                     />
                 )}
             />
