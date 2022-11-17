@@ -9,7 +9,7 @@ const screenWidth = Dimensions.get("window").width;
 
 const timeframes = [ 'Select Timeframe', 'Weekly', 'Monthly', 'Every 6 Months', 'Yearly' ];
 
-export default function SetLimitPage({setModalVisible, modalVisible}) {
+export default function SetLimitPage({setModalVisible, modalVisible, retLimit}) {
     const [tf_modal, setTf_modal] = useState(false);
     const [tf_modal2, setTf_modal2] = useState(false);
 
@@ -26,11 +26,25 @@ export default function SetLimitPage({setModalVisible, modalVisible}) {
     const resetLimit = () => {
         setOption('Select timeframe');
         setLimit(0);
+        retLimit({});
     };
 
     const toggleTf_modal2 = () => {
         setTf_modal2(!tf_modal2);
     };
+
+    const confirm = () => {
+      if (limit == 0) {
+        retLimit({});
+      } else {
+        retLimit({
+          time: option,
+          limit: limit
+        })
+      }
+
+      setModalVisible(!modalVisible)
+    }
 
   return (
 
@@ -100,7 +114,7 @@ export default function SetLimitPage({setModalVisible, modalVisible}) {
             <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
                 <Pressable
                 style={[styles.button, styles.buttonOpen]}
-                onPress={() => setModalVisible(!modalVisible)}
+                onPress={confirm}
                 >
                 <Text style={styles.textStyle}>Set Limit</Text>
                 </Pressable>

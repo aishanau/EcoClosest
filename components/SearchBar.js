@@ -2,6 +2,8 @@ import * as React from "react";
 import { SearchBar, Button, Icon, Input } from "@rneui/base";
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 
+import database from '../index.js';
+
 export default ({navigation, val}) => {
   const [value, setValue] = React.useState('');
 

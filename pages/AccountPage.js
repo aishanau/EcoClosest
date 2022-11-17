@@ -1,23 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ScrollView, Saf, TouchableOpacity, Alert, Modal, Pressable } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Saf, TouchableOpacity, Image, Pressable, Dimensions } from 'react-native';
 import { Button, ButtonGroup, withTheme, Divider, Icon } from '@rneui/themed';
 
 import SetLimitPage from './SetLimitPage';
 
+const screenWidth = Dimensions.get("window").width;
+
 export default function AccountPage() {
     const [modalVisible, setModalVisible] = useState(false);
+    const [limit, setLimit] = useState({});
+    const [isLimit, setIslimit] = useState(false);
+
+    useEffect(() => {
+      if (limit !=={} && limit.time && limit.limit) {
+        setIslimit(true);
+      }
+    }, [limit])
   return (
     <ScrollView style={styles.container}>
     <View style={{ paddingTop: 20, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin: 0 }}>
+      <Text style={styles.header}>Habit this Month</Text>
+      <Image
+        style={styles.graph}
+          source={
+            require('../assets/graph.jpeg')
+          }
+      />
+      
+      {!isLimit ? 
+        <Text> </Text> 
+        : <Text style={styles.sub}> You have set a limit of {limit.limit} Items {limit.time} </Text>
+      }
 
-        <SetLimitPage setModalVisible={setModalVisible} modalVisible={modalVisible} />
+        <SetLimitPage setModalVisible={setModalVisible} modalVisible={modalVisible} retLimit={setLimit}/>
 
         <Pressable
             style={[styles.button, styles.buttonOpen]}
             onPress={() => setModalVisible(!modalVisible)}
             >
-            <Text style={styles.textStyle}>Set Limit</Text>
+            {!isLimit ? <Text style={styles.textStyle}>Set Limit</Text> : <Text style={styles.textStyle}>Change Limit</Text>}
+            
         </Pressable>
 
         <TouchableOpacity
@@ -167,5 +190,26 @@ const styles = StyleSheet.create({
   },
   modalText: {
     marginBottom: 15,
-  }
+  },
+  graph: {
+    width: screenWidth,
+    height: 200,
+    resizeMode: 'cover',
+  },
+  header: {
+    padding: 10,
+    fontWeight: "700",
+    fontSize: 20,
+    letterSpacing: 1,
+    textAlignment: "center",
+    color: "#FB5C5C",
+  },
+  sub: {
+    padding: 10,
+    fontWeight: "500",
+    fontSize: 14,
+    // letterSpacing: 1,
+    textAlignment: "center",
+    color: "#FB5C5C",
+  },
 });

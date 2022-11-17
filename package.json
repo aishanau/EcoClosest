@@ -13,6 +13,7 @@
     "@react-navigation/native-stack": "^6.9.1",
     "@rneui/base": "^4.0.0-rc.7",
     "@rneui/themed": "^4.0.0-rc.7",
+    "@react-navigation/bottom-tabs": "^6.4.0",
     "expo": "~47.0.3",
     "expo-status-bar": "~1.4.2",
     "react": "18.1.0",
@@ -20,7 +21,9 @@
     "react-native-multiple-select": "^0.5.12",
     "react-native-paper": "^5.0.0-rc.9",
     "react-native-safe-area-context": "4.4.1",
-    "react-native-screens": "~3.18.0"
+    "react-native-screens": "~3.18.0",
+    "expo-image-picker": "~14.0.1",
+    "vector-icons": "^0.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

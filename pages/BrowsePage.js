@@ -15,7 +15,7 @@ import database from '../index.js';
 export default function BrowsePage( {navigation} ) {
     const [category, setCategory] = useState([ 
         {title: "Shirt", image: require('../assets/shirticon.png') },
-        {title: "Jeans", image: require('../assets/jeansicon.png') },
+        {title: "Pants", image: require('../assets/jeansicon.png') },
         {title: "Sweater", image: require('../assets/sweatericon.png') },
         {title: "Jackets", image: require('../assets/jacketicon.png') },
     ]);
@@ -43,6 +43,7 @@ export default function BrowsePage( {navigation} ) {
                 key={idx}
                 title={title}
                 image={image}
+                navigation={navigation}
             />
             ))}
         </View>

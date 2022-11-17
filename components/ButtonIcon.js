@@ -4,11 +4,20 @@ import {TouchableOpacity, Text, Image, View, StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Card } from '@rneui/themed';
 import titles from '../index.js';
+import CategoryPage from '../pages/CategoryPage';
 
-export default function ButtonIcon({title, image}) {
+export default function ButtonIcon({title, image, navigation}) {
+
+  const update = () => {
+    // console.log(title) 
+    navigation.navigate("Category", {item: title})
+  };
 
     return (
-    <TouchableOpacity style={styles.btn}>
+    <TouchableOpacity 
+    style={styles.btn}
+    onPress={update}
+    >
         <Card containerStyle={styles.card} wrapperStyle={styles.innerCard}>
           <Image
           source={

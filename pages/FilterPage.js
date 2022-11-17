@@ -21,6 +21,15 @@ const materials = [
     { id: 5, name: 'Others' },
 ];
 
+const brands_list = [
+    { id: 1, name: 'North Face' },
+    { id: 2, name: 'Burberry' },
+    { id: 3, name: 'Outland' },
+    { id: 4, name: 'DK Active' },
+    { id: 5, name: 'A.Bch' },
+    { id: 6, name: 'Others' },
+];
+
 export default function FilterPage({setModalVisible, modalVisible}) {
     const [sort_modal, setSort_modal] = useState(false);
     const [number, setNumber] = React.useState(0);
@@ -38,6 +47,9 @@ export default function FilterPage({setModalVisible, modalVisible}) {
     const [material_modal, setMaterial_modal] = useState(false);
     const [selected_materials, setMaterials] = useState([]);
 
+    const [brands_modal, setBrands_modal] = useState(false);
+    const [selected_brands, setBrands] = useState([]);
+
     const toggle_sort_modal = () => {
         setSort_modal(!sort_modal);
     };
@@ -54,9 +66,8 @@ export default function FilterPage({setModalVisible, modalVisible}) {
         setMaterial_modal(!material_modal);
     };
 
-    const resetLimit = () => {
-        setOption('Popularity');
-        setLimit(0);
+    const toggle_brands_modal = () => {
+        setBrands_modal(!brands_modal);
     };
 
   return (
@@ -136,13 +147,15 @@ export default function FilterPage({setModalVisible, modalVisible}) {
                     onPress={toggle_material_modal}>
                         <Text>Selected Materials </Text>
                         <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                        <View style={{flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-end' }}>
                         {/* <FlatList
                             data={selected_materials}
                             renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
                         /> */}
-                        {/* {selected_materials.map((item, idx) => (
+                        {selected_materials.map((item, idx) => (
                             <Text>{item} </Text>
-                            ))} */}
+                            ))}
+                        </View>
                         <Icon
                             reverse
                             name='right'
@@ -153,7 +166,34 @@ export default function FilterPage({setModalVisible, modalVisible}) {
                             onPress={() => console.log("onPress()")}
                         />
                         </View>
+
                 </TouchableOpacity>
+
+                {/* SELECT BRANDS  */}
+                <TouchableOpacity
+                    style={styles.menu}
+                    onPress={toggle_brands_modal}>
+                        <Text>Selected Brands </Text>
+                        <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                        <View style={{flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-end' }}>
+
+                        {selected_brands.map((item, idx) => (
+                            <Text>{item} </Text>
+                            ))}
+                        </View>
+                        <Icon
+                            reverse
+                            name='right'
+                            type='antdesign'
+                            color='transparent'
+                            iconProps={{ color: "#FB5C5C" }}
+                            // containerStyle={{ position: 'absolute', right: 0 }}
+                            onPress={() => console.log("onPress()")}
+                        />
+                        </View>
+
+                </TouchableOpacity>
+
             </View>
 
 
@@ -299,6 +339,25 @@ export default function FilterPage({setModalVisible, modalVisible}) {
                 </Dialog.Actions>
             </Dialog>
 
+            {/* SELECT BRANDS */}
+            <Dialog
+            isVisible={brands_modal}
+            onBackdropPress={toggle_brands_modal}
+            >
+                <Dialog.Title title="Select Materials"/>
+                <View style={[styles.multiselect]}>
+                    <MultiSelectBar items={brands_list} setItems={setBrands}/>
+                </View>
+                <Dialog.Actions>
+                    <Dialog.Button
+                    title="CONFIRM"
+                    onPress={() => {
+                        toggle_brands_modal();
+                    }}
+                    />
+                    <Dialog.Button title="CANCEL" onPress={toggle_brands_modal} />
+                </Dialog.Actions>
+            </Dialog>
         </View>
         </View>
 
