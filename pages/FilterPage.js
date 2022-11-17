@@ -4,12 +4,22 @@ import { Button, ButtonGroup, withTheme, Divider,
     Icon, Dialog, CheckBox, Slider } from '@rneui/themed';
 import { StyleSheet, Text, View, ScrollView, Saf, 
     TouchableOpacity, Alert, Modal, Pressable, 
-    Dimensions, TextInput } from 'react-native';
+    Dimensions, TextInput, FlatList } from 'react-native';
+
+import MultiSelectBar from '../components/MultiSelect';
 
 const screenWidth = Dimensions.get("window").width;
 
 const timeframes = [ 'Popularity', 'Price Low to High', 'Price High to Low', 'Alphabetical A-Z' ];
 const sizes = ['Extra-small', 'Small', 'Medium', 'Large', 'Extra-Large'];
+
+const materials = [
+    { id: 1, name: 'Cotton' },
+    { id: 2, name: 'Wool' },
+    { id: 3, name: 'Linen' },
+    { id: 4, name: 'Plant-based Fibres' },
+    { id: 5, name: 'Others' },
+];
 
 export default function FilterPage({setModalVisible, modalVisible}) {
     const [sort_modal, setSort_modal] = useState(false);
@@ -25,6 +35,9 @@ export default function FilterPage({setModalVisible, modalVisible}) {
     const [price_modal, setPrice_modal] = useState(false);
     const [max_value, setMaxValue] = useState(300);
 
+    const [material_modal, setMaterial_modal] = useState(false);
+    const [selected_materials, setMaterials] = useState([]);
+
     const toggle_sort_modal = () => {
         setSort_modal(!sort_modal);
     };
@@ -37,11 +50,14 @@ export default function FilterPage({setModalVisible, modalVisible}) {
         setPrice_modal(!price_modal);
     };
 
+    const toggle_material_modal = () => {
+        setMaterial_modal(!material_modal);
+    };
+
     const resetLimit = () => {
         setOption('Popularity');
         setLimit(0);
     };
-
 
   return (
 
@@ -102,6 +118,31 @@ export default function FilterPage({setModalVisible, modalVisible}) {
                         <Text> Price Range </Text>
                         <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                         <Text>{max_value}</Text>
+                        <Icon
+                            reverse
+                            name='right'
+                            type='antdesign'
+                            color='transparent'
+                            iconProps={{ color: "#FB5C5C" }}
+                            // containerStyle={{ position: 'absolute', right: 0 }}
+                            onPress={() => console.log("onPress()")}
+                        />
+                        </View>
+                </TouchableOpacity>
+
+                {/* SELECT MATERIALS  */}
+                <TouchableOpacity
+                    style={styles.menu}
+                    onPress={toggle_material_modal}>
+                        <Text>Selected Materials </Text>
+                        <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                        {/* <FlatList
+                            data={selected_materials}
+                            renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
+                        /> */}
+                        {/* {selected_materials.map((item, idx) => (
+                            <Text>{item} </Text>
+                            ))} */}
                         <Icon
                             reverse
                             name='right'
@@ -238,6 +279,26 @@ export default function FilterPage({setModalVisible, modalVisible}) {
                 </Dialog.Actions>
             </Dialog>
 
+            {/* SELECT MATERIALS */}
+            <Dialog
+            isVisible={material_modal}
+            onBackdropPress={toggle_material_modal}
+            >
+                <Dialog.Title title="Select Materials"/>
+                <View style={[styles.multiselect]}>
+                    <MultiSelectBar items={materials} setItems={setMaterials}/>
+                </View>
+                <Dialog.Actions>
+                    <Dialog.Button
+                    title="CONFIRM"
+                    onPress={() => {
+                        toggle_material_modal();
+                    }}
+                    />
+                    <Dialog.Button title="CANCEL" onPress={toggle_material_modal} />
+                </Dialog.Actions>
+            </Dialog>
+
         </View>
         </View>
 
@@ -248,6 +309,10 @@ export default function FilterPage({setModalVisible, modalVisible}) {
 
 
 const styles = StyleSheet.create({
+    multiselect: {
+        width: '100%',
+        height: 300
+    },
     menu: {
     //   padding: 5,
       width: screenWidth,
@@ -262,7 +327,7 @@ const styles = StyleSheet.create({
       width: screenWidth,
       flex: 1,
       marginTop: 22,
-      justifyContent: "center",
+      justifyContent: "flex-end",
     },
     modalView: {
       margin: 5,

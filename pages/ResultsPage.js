@@ -6,6 +6,8 @@ import ItemCard from '../components/ItemCard';
 import ButtonIcon from '../components/ButtonIcon';
 import SearchBar from '../components/SearchBar';
 import FilterPage from './FilterPage';
+
+
 import { Button, ButtonGroup, withTheme, Icon } from '@rneui/themed';
 
 // import titles from '../index.js';
