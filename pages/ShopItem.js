@@ -3,6 +3,7 @@ import { StyleSheet, View, ScrollView, TouchableOpacity, Text, Modal, SectionLis
 import { Icon, Image, Dialog, ListItem, Divider} from '@rneui/themed';
 import { Input } from "@rneui/base";
 import { Button } from '@rneui/themed';
+import { timeout } from "q";
 
 export default function ShopItem() {
   let details = {
@@ -17,9 +18,10 @@ export default function ShopItem() {
   const [expandedReturn, setExpandedReturn] = useState(false);
 
   const [sizeModalVisible, setSizeModalVisible] = useState(false);
+  const [alertVisible, setAlertVisible] = useState(false);
 
   const showAlert = () => {
-    Alert.alert('Added to Cart!');
+    setAlertVisible(true);
   }
 
 
@@ -48,6 +50,7 @@ export default function ShopItem() {
           <Icon name="shopping-bag" type="font-awesome" color="white" size="20"/>
           <Text style={styles.btnText}>Add to Cart</Text>
         </Button>
+        {/* SIZE MODAL */}
         <Modal
           animationType="slide"
           transparent
@@ -75,6 +78,18 @@ export default function ShopItem() {
                   </TouchableOpacity>
                 })}
               </View>
+            </View>
+          </View>
+        </Modal>
+        {/* ADDED TO CART ALERT */}
+        <Modal 
+          animationType="fade"
+          transparent
+          visible={alertVisible}
+        >
+          <View style={styles.alertOverlay}>
+            <View style={styles.alertView}>
+                <Text style={{color: 'white', textAlign: 'center', fontSize: 17}}>Added to Cart!</Text>
             </View>
           </View>
         </Modal>
@@ -196,6 +211,28 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5
+  },
+  alertOverlay: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  alertView: {
+    backgroundColor: 'rgba(52, 52, 52, 0.6)',
+    borderRadius: 20,
+    marginHorizontal: 70,
+    paddingVertical: 50,
+    paddingHorizontal: 10,
+    // alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 })
 
