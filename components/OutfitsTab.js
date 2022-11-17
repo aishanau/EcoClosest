@@ -8,9 +8,10 @@ import PrimaryButton from "./PrimaryButton";
 
 const screenWidth = Dimensions.get("window").width;
 
-const OutfitsTab = () => {
+const OutfitsTab = ({ navigation, route }) => {
   const createOutfitEvent = () => {
-    console.log("trigger to add item modal, choose upload or take photo");
+    console.log("navigate to CreateOutfitPage");
+    navigation.navigate("Create Outfit", {});
   }
 
   // useEffect(()=>{console.log("the outfits category list list is ", outfitsCategoryList[0].list)})

@@ -16,7 +16,7 @@ import * as ImagePicker from 'expo-image-picker';
 
 const screenWidth = Dimensions.get("window").width;
 
-const ClothesTab = () => {
+const ClothesTab = ({ navigation, route }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [image, setImage] = useState(null);
 

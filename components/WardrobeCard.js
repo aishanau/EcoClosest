@@ -3,14 +3,14 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Card } from "@rneui/themed";
 import { MAIN_TEXT_COLOUR, SECONDARY_COLOUR } from "../styles";
 
-const WardrobeCard = ({ item, brand, image }) => {
+const WardrobeCard = ({ item, brand, image, containerStyles }) => {
 
   return (
     <TouchableOpacity
       style={styles.container}
       onPress={() => console.log("this leads to item details page")}
     >
-      <Card containerStyle={styles.card}>
+      <Card containerStyle={[styles.card, containerStyles]}>
         <Card.Image
           style={{ padding: 0, width: 120, height: 120, resizeMode: "cover" }}
           source={{
