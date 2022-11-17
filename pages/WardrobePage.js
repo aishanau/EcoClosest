@@ -5,15 +5,18 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import ClothesTab from "../components/ClothesTab";
 import OutfitsTab from "../components/OutfitsTab";
 import { PRIMARY_COLOUR, SECONDARY_COLOUR } from "../styles";
 const screenWidth = Dimensions.get("window").width;
 
-const WardrobePage = () => {
+const WardrobePage = ({ route, navigation }) => {
   const [isActive, setIsActive] = useState(true);
+
+  useEffect(() => navigation.setOptions({ title : "Wardrobe" }), []);
+
 
   const styles = StyleSheet.create({
     leftTab: {
