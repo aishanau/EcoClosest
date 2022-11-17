@@ -7,7 +7,7 @@ import SearchBar from '../components/SearchBar';
 
 import { Button } from '@rneui/themed';
 
-export default function UploadItem({image}) {
+export default function UploadItem({navigation, route}) {
   const [item, setItem] = useState('');
   const [brand, setBrand] = useState('');
   const [category, setCategory] = useState('');
@@ -47,7 +47,7 @@ export default function UploadItem({image}) {
         <Text style={styles.heading}>Add Details</Text>
       </View>
       <Image
-        source={{uri: image}}
+        source={{uri: route.params.image}}
         containerStyle={{aspectRatio: 1, width: '100%', height: 'auto', backgroundColor: '#ccc', marginVertical: 20}}
       />
 
