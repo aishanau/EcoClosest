@@ -5,13 +5,13 @@ import { Input } from "@rneui/base";
 import { Button } from '@rneui/themed';
 import { timeout } from "q";
 
-export default function ShopItem() {
-  let details = {
-    name: 'Purple Hoodie',
-    brand: 'Geeta Mens',
-    price: '$48.00 AUD',
-    icon: null
-  }
+export default function ShopItem({navigation, route}) {
+  // let details = {
+  //   name: 'Purple Hoodie',
+  //   brand: 'Geeta Mens',
+  //   price: '$48.00 AUD',
+  //   icon: null
+  // }
 
   const [expandedFabric, setExpandedFabric] = useState(false);
   const [expandedCare, setExpandedCare] = useState(false);
@@ -32,6 +32,9 @@ export default function ShopItem() {
     // TODO: Add details to cart database?
   }
 
+  const tryInOutfit = (image) => {
+    // TODO: Navigate to try outifts page
+  }
 
   return <ScrollView>
       {/* IMAGE */}
@@ -39,12 +42,12 @@ export default function ShopItem() {
       {/* <TouchableOpacity style={{position: 'absolute', left: 35, top: 70, zIndex: 2}}>
         <Icon name="arrowleft" type="antdesign"/>
       </TouchableOpacity> */}
-      <Image source={{uri: details.icon}} containerStyle={{aspectRatio: 0.8, backgroundColor: '#ccc', width: '100%'}} />
+      <Image source={{uri: route.params.details.icon}} containerStyle={{aspectRatio: 0.8, backgroundColor: '#ccc', width: '100%'}} />
       {/* ITEM INFO */}
       <View style={{ padding: 20}}>
-        <Text style={{fontWeight: 'bold', fontSize: 20, marginVertical: 5}}>{details.name}</Text>
-        <Text>{details.brand}</Text>
-        <Text style={{fontWeight: 'bold', fontSize: 15, marginVertical: 15}}>{details.price}</Text>
+        <Text style={{fontWeight: 'bold', fontSize: 20, marginVertical: 5}}>{route.params.details.name}</Text>
+        <Text>{route.params.details.brand}</Text>
+        <Text style={{fontWeight: 'bold', fontSize: 15, marginVertical: 15}}>{route.params.details.price}</Text>
         <Text style={{fontWeight: 'bold', fontSize: 11}}>DESCRIPTION</Text>
         <Text style={{fontSize: 12, marginTop: 10, marginBottom: 20}}>{description}</Text>
 
@@ -105,6 +108,7 @@ export default function ShopItem() {
         <Button 
           buttonStyle={styles.btn}
           containerStyle={{marginVertical: 10}}
+          onPress={() => {tryInOutfit(route.params.details.icon)}}
         >
           <Icon name="hanger" type="material-community" color="white" size="20"/>
           <Text style={styles.btnText}>Try in Outfit</Text>

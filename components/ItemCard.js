@@ -2,25 +2,25 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Card } from '@rneui/themed';
 
-export default function ItemCard({name, icon, price}) {
+export default function ItemCard({navigation, details}) {
   return (
     <TouchableOpacity 
     style={styles.container}
-    onPress={() => console.log('click for more details')}
+    onPress={() => {navigation.navigate("Shop Item", {details: details})}}
     >
         <Card containerStyle={styles.card}>
           <Card.Image
-            style={{ padding: 0, width: 120, height: 120, resizeMode: 'cover' }}
+            style={{ padding: 0, width: 100, height: 100, resizeMode: 'cover'}}
             source={{
-              uri: icon
+              uri: details.icon
             }}
           />
         <View style={styles.innerCard}>
           <Text style={styles.title}>
-            {name}
+            {details.name}
           </Text>
           <Text style={styles.price}>
-            {price}
+            {details.price}
           </Text>
         </View>
         </Card>
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   card: {
     border: '10px',
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     fontSize: '14px',
   },
   price: { 
-    fontSize: '16px',
+    fontSize: '14px',
     fontColor: '#D8143A'
   },
 });

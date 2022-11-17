@@ -11,19 +11,13 @@ import { Button, ButtonGroup, withTheme } from '@rneui/themed';
 // import titles from '../index.js';
 import database from '../index.js';
 
-const titles = {
-  shirt: {
-      name: "Shirt",
-      icon: require('../assets/shirticon.png')
-  }
-};
 
-export default function BrowsePage() {
+export default function BrowsePage( {navigation} ) {
     const [category, setCategory] = useState([ 
-        {title: titles.shirt.name, image: titles.shirt.icon },
-        {title: titles.shirt.name, image: titles.shirt.icon },
-        {title: titles.shirt.name, image: titles.shirt.icon },
-        {title: titles.shirt.name, image: titles.shirt.icon },
+        {title: "Shirt", image: require('../assets/shirticon.png') },
+        {title: "Pants", image: require('../assets/jeansicon.png') },
+        {title: "Sweater", image: require('../assets/sweatericon.png') },
+        {title: "Jackets", image: require('../assets/jacketicon.png') },
     ]);
 
     const [saleItems, setSaleItems] = useState(database.pants);
@@ -37,7 +31,7 @@ export default function BrowsePage() {
           <Text>
               All Items Are Ethically Sourced
           </Text>
-         <SearchBar />
+         <SearchBar navigation={navigation} val=""/>
         </View>
 
         <Text style={styles.title}>
@@ -49,6 +43,7 @@ export default function BrowsePage() {
                 key={idx}
                 title={title}
                 image={image}
+                navigation={navigation}
             />
             ))}
         </View>
@@ -80,9 +75,11 @@ export default function BrowsePage() {
             {saleItems.map((item, idx) => (
                 <ItemCard
                 key={idx}
-                name={item.name}
-                price={item.price}
-                icon={item.icon}
+                navigation={navigation}
+                details={item}
+                // name={item.name}
+                // price={item.price}
+                // icon={item.icon}
                 />
       ))}
             </ScrollView>
@@ -96,12 +93,18 @@ export default function BrowsePage() {
             horizontal={true}
             >
             {saleItems.map((item, idx) => (
+                <>
+                {console.log(item)}
                 <ItemCard
                 key={idx}
-                name={item.name}
-                price={item.price}
-                icon={item.icon}
+                navigation={navigation}
+                details={item}
+                // name={item.name}
+                // price={item.price}
+                // icon={item.icon}
                 />
+                </>
+                
       ))}
             </ScrollView>
         </View>

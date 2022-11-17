@@ -2,20 +2,7 @@ import * as React from "react";
 import { SearchBar, Button, Icon, Input } from "@rneui/base";
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 
-import database from '../index.js';
-
-export default ({navigation, val}) => {
-  const [value, setValue] = React.useState('');
-
-  const updateSearch = (value) => {
-    setValue(value);
-  };
-
-  const update = () => {
-    console.log(value)
-    navigation.navigate("Results", {item: value})
-  };
-
+export default ({value, setValue}) => {
   return (
     <View style={styles.container}>
 
@@ -37,9 +24,10 @@ export default ({navigation, val}) => {
         platform="ios"
         containerStyle={styles.inner}
         inputContainerStyle={styles.inner}
-        inputStyle={{fontColor: 'white'}}
-        searchIcon={{color: '#FFD0D0'}}
-        onChangeText={updateSearch}
+        inputStyle={{fontColor: 'white', fontSize: 15}}
+        searchIcon={{color: '#fff'}}
+        loadingProps={{}}
+        onChangeText={newVal => setValue(newVal)}
         onClearText={() => console.log(onClearText())}
         placeholder="Search items"
         placeholderTextColor="#fff"
@@ -58,15 +46,9 @@ export default ({navigation, val}) => {
 
 const styles = StyleSheet.create({
     container: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center'
-    },
-    search: {
-        width: 250,
+        width: 340,
         borderRadius: 20,
-        margin: 10
+        margin: 30,
     },
     inner: {
         backgroundColor: '#FFD0D0',

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Modal, SectionLis
 import { Icon, Image, Dialog, ListItem, Divider} from '@rneui/themed';
 import { Input } from "@rneui/base";
 
-import SearchBar from '../components/SearchBar';
+import SearchBar from '../components/BrandSearch';
 
 import { Button } from '@rneui/themed';
 

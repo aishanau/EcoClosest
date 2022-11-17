@@ -13,14 +13,19 @@ import { PRIMARY_COLOUR } from "./styles";
 const RootStack = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
 
-import BrowsePage from './pages/BrowsePage'
-import UploadItem from './pages/UploadItem'
+import UploadItem from './pages/UploadItem';
 import ItemDetails from './pages/ItemDetails';
 import PhotoGallery from './pages/PhotoGallery';
 import ShopItem from './pages/ShopItem';
+import BrowsePage from './pages/BrowsePage';
+import ResultsPage from './pages/ResultsPage';
+import AccountPage from './pages/AccountPage';
+import CategoryPage from './pages/CategoryPage';
+
+import titles from './index.js';
 
 export default function App() {
-  
+
   const TabsNav = () => (
     <Tabs.Navigator screenOptions={{ headerShown: false }}>
       <Tabs.Screen
@@ -32,7 +37,7 @@ export default function App() {
       />
       <Tabs.Screen
         name="Shop"
-        component={ShopItem}
+        component={BrowsePage}
         options={{
           tabBarIcon: ({ size }) => <Ionicons name="md-search" size={size} color={PRIMARY_COLOUR} style={{marginTop: 10, marginBottom: 3}}/>,
         }}
@@ -46,7 +51,7 @@ export default function App() {
       />
       <Tabs.Screen
         name="Account"
-        component={SamplePage2}
+        component={AccountPage}
         options={{
           tabBarIcon: ({ size }) => <MaterialCommunityIcons name="account" size={size} color={PRIMARY_COLOUR} style={{marginTop: 10, marginBottom: 3}} />,
         }}
@@ -65,11 +70,14 @@ export default function App() {
     <NavigationContainer>
       <RootStack.Navigator tabBarOptions={tabBarOptions} initialRouteName="EcoCloset">
         <RootStack.Screen name="Wardrobe" component={WardrobePage} />
-        <RootStack.Screen name="Shop" component={ShopItem} />
         <RootStack.Screen name="Cart" component={SamplePage} />
         <RootStack.Screen name="Account" component={SamplePage2} />
         <RootStack.Screen name="Upload Item" component={UploadItem} />
         <RootStack.Screen name="Item Details" component={ItemDetails} />
+        <RootStack.Screen name="Shop" component={BrowsePage} />
+        <RootStack.Screen name="Shop Item" component={ShopItem} />
+        <RootStack.Screen name="Results" component={ResultsPage} options={{ title: "Results" }}/>
+        <RootStack.Screen name="Category" component={CategoryPage} options={{ title: "Category" }}/>
         <RootStack.Screen name="EcoCloset" component={TabsNav} />
       </RootStack.Navigator>
     </NavigationContainer>
