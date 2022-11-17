@@ -11,7 +11,7 @@ export default function Checkout() {
   const [email, onChangeEmail] = React.useState("");
   const [fname, onChangefname] = React.useState("");
   const [lname, onChangelname] = React.useState("");
-  const [number, onChangeNumber] = React.useState(null);
+  const [number, onChangeNumber] = React.useState("");
   const [addy1, onChangeAddy1] = React.useState("");
   const [addy2, onChangeAddy2] = React.useState("");
   const [city, onChangeCity] = React.useState("");
