@@ -1,7 +1,9 @@
+
+import WardrobePage from './pages/WardrobePage';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StyleSheet, Text, SafeViewArea } from "react-native";
+import { StyleSheet } from "react-native";
 import SamplePage from "./components/SamplePage";
 import SamplePage2 from "./components/SamplePage2";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -17,7 +19,7 @@ export default function App() {
     <Tabs.Navigator screenOptions={{ headerShown: false }}>
       <Tabs.Screen
         name="Wardrobe"
-        component={SamplePage}
+        component={WardrobePage}
         options={{
           tabBarIcon: ({ size }) => <MaterialCommunityIcons name="hanger" size={size} color={PRIMARY_COLOUR} />,
         }}
@@ -56,7 +58,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <RootStack.Navigator tabBarOptions={tabBarOptions} initialRouteName="EcoCloset">
-        <RootStack.Screen name="Wardrobe" component={SamplePage} />
+        <RootStack.Screen name="Wardrobe" component={WardrobePage} />
         <RootStack.Screen name="Shop" component={SamplePage2} />
         <RootStack.Screen name="Cart" component={SamplePage} />
         <RootStack.Screen name="Account" component={SamplePage2} />
@@ -65,6 +67,7 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
