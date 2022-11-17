@@ -20,6 +20,7 @@ const CreateOutfitPage = ({ navigation, route }) => {
   return (
     <>
       <ScrollView>
+        <Text>Outerwear</Text>
         <ImageCarousel data={outerwear} />
         <ImageCarousel data={tops} />
       </ScrollView>
