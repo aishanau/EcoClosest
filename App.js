@@ -3,14 +3,16 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import CartPage from './pages/CartPage'
 import Checkout from './pages/Checkout'
+import CheckoutSuccess from './pages/CheckoutSuccess';
 
 import titles from './index.js';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Checkout/>
+      {/* <Checkout/> */}
       {/* <CartPage/> */}
+      <CheckoutSuccess/>
     </View>
   );
 }

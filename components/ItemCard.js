@@ -16,8 +16,16 @@ const ItemCard = ({database, setDatabase, quantity, setQuantity, idx, name, icon
     setDb(database);
   }
 
+  const deleteItem = (quan) => {
+    setQuantity(quan);
+    const newDb = database;
+    newDb['pants'][idx]['quantity'] = parseInt(event)
+    setDatabase(newDb);
+    setDb(database);
+  }
+
   useEffect(() => {
-    console.log(setDb(database));
+    setDb(database);
   }, [database])
   
   return (
@@ -33,9 +41,11 @@ const ItemCard = ({database, setDatabase, quantity, setQuantity, idx, name, icon
       <View style={styles.rightInfo}>
         <View style={styles.deleteIcon}>
           <Text style={styles.productTitle}>{name}</Text>
-          <Image
-            style={{ width: 22, height: 22, resizeMode: 'cover' }}
-            source={require('../assets/deleteicon.png')} />
+          <TouchableOpacity onPress={() => deleteItem(0)}>
+            <Image
+              style={{ width: 22, height: 22, resizeMode: 'cover' }}
+              source={require('../assets/deleteicon.png')} />
+          </TouchableOpacity>
         </View>
         {/* <View style={styles.productName}>
       

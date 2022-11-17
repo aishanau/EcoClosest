@@ -19,14 +19,14 @@ export let database = {
             price: '$89.99',
             icon: "https://images.pexels.com/photos/6402846/pexels-photo-6402846.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
             description: "High quality Levi original branded jeans. Made of sustainable materials and long lasting.",
-            quantity: 1,
+            quantity: 0,
         },
         {
             name: "Stradvis Jeans",
             price: '$67.99',
             icon: 'https://images.pexels.com/photos/65676/nanjing-studio-jeans-65676.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
             description: "High quality Stradvis original branded jeans. Made of sustainable materials and long lasting.",
-            quantity: 1,
+            quantity: 0,
         },
     ],
 };

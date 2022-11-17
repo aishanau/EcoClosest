@@ -3,19 +3,33 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ScrollView, Saf } from 'react-native';
 
 import ItemCard from '../components/ItemCard';
-import ButtonIcon from '../components/ButtonIcon';
+import CartExceedingModal from "../components/CartExceedingModal";
 
 import { Button, ButtonGroup, withTheme } from '@rneui/themed';
 
-// import titles from '../index.js';
 import { getDb, setDb } from '../index.js';
 
 export default function CartPage() {
 
   const [database, setDatabase] = useState(getDb());
-  const [myItems, setItems] = useState([...[database.pants[0], database.pants[1]]]);
+  const [myItems, setItems] = useState([]);
   const [quantity, setQuantity] = useState(1)
   const [total, setTotal] = useState(0)
+  const [modalDisplay, setModalDisplay] = useState('none')
+  const [limit, setLimit] = useState(3);
+  
+  // initial use effect to see what items are in cart
+  useEffect(() => {
+    let newItems = []
+    for (let item of database['pants']) {
+      if (item.quantity > 0) {
+        newItems.push(item);
+      }
+    }
+    // update myItems
+    setItems(newItems);
+
+  }, [])
 
   useEffect(() => {
     let t = 0
@@ -26,13 +40,38 @@ export default function CartPage() {
     console.log(t)
   }, [quantity, database])
   
+  // use effect to update items shown on page
+  useEffect(() => {
+    let newItems = []
+    let totalQuantity = 0
+    for (let item of database['pants']) {
+      if (item.quantity > 0) {
+        totalQuantity = totalQuantity + item.quantity;
+        newItems.push(item);
+      }
+    }
+    console.log(modalDisplay);
+    if (totalQuantity > limit) {
+      setModalDisplay('flex');
+    } else if (totalQuantity <= limit) {
+      setModalDisplay('none');
+    }
+    // update myItems
+    setItems(newItems);
+
+  }, [quantity, database])
+
   return (
     <ScrollView style={styles.container} vertical={true}>
+        
         <View style={{ paddingTop: 20, paddingBottom: 20, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
           <Text style={styles.header}>
               My Cart
           </Text>
         </View>
+        <CartExceedingModal
+          display={modalDisplay} 
+        />
 
         <View style={styles.album}>
           {myItems.map((item, idx) => (
@@ -74,11 +113,20 @@ export default function CartPage() {
           
         </View>
         <Button
-          onPress={onPressLearnMore}
-          title="Checkout ->"
-          color="#841584"
-          accessibilityLabel="Learn more about this purple button"
-        />
+            title="Checkout"
+            loading={false}
+            loadingProps={{ size: 'small', color: 'white' }}
+            buttonStyle={styles.btnYES}
+            titleStyle={{ fontWeight: '600', fontSize: 16, color: '#FB5C5C' }}
+            containerStyle={{
+              marginHorizontal: 50,
+              height: 50,
+              width: 300,
+              marginVertical: 10,
+              alignSelf: 'center',
+            }}
+            onPress={() => console.log('aye')}
+          />
     </ScrollView>
 
   );
@@ -126,5 +174,14 @@ const styles = StyleSheet.create({
   priceText: {
     fontSize: '20px',
     fontWeight: '400',
+  },
+  btnYES: {
+    backgroundColor: '#FFD0D0',
+    borderRadius: 30,
+    // alignItems: 'center',
+  },
+  btnNO: {
+    backgroundColor: '#eeeeee',
+    borderRadius: 30,
   },
 });
