@@ -5,7 +5,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import ClothesTab from "../components/ClothesTab";
 import OutfitsTab from "../components/OutfitsTab";
@@ -16,11 +16,6 @@ const WardrobePage = () => {
   const [isActive, setIsActive] = useState(true);
 
   const styles = StyleSheet.create({
-    container: {
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
-    },
     leftTab: {
       height: 50,
       backgroundColor: isActive ? PRIMARY_COLOUR : SECONDARY_COLOUR,
@@ -61,12 +56,6 @@ const WardrobePage = () => {
 
   return (
     <>
-      <View
-        style={styles.container}
-      >
-        <Text style={styles.header}>Wardrobe</Text>
-      </View>
-
       <View
         style={{
           display: "flex",
