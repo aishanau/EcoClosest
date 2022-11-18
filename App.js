@@ -25,6 +25,7 @@ import AccountPage from './pages/AccountPage';
 import CategoryPage from './pages/CategoryPage';
 
 import titles from './index.js';
+import ViewOutfit from "./pages/ViewOutfit";
 
 export default function App() {
 
@@ -76,6 +77,7 @@ export default function App() {
         <RootStack.Screen name="Create Outfit" component={CreateOutfitPage} />
         <RootStack.Screen name="Upload Item" component={UploadItem} />
         <RootStack.Screen name="Item Details" component={ItemDetails} />
+        <RootStack.Screen name="View Outfit" component={ViewOutfit} />
         <RootStack.Screen name="Shop" component={BrowsePage} />
         <RootStack.Screen name="Shop Item" component={ShopItem} />
         <RootStack.Screen name="Results" component={ResultsPage} options={{ title: "Results" }}/>
