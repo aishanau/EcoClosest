@@ -5,21 +5,7 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 export default ({value, setValue}) => {
   return (
     <View style={styles.container}>
-
-      
-      <TouchableOpacity
-      onPress={update}>
-      {/* // style={{backgroundColor: 'transparent'}}> */}
-        <Icon
-          name='search1'
-          type='antdesign'
-          color='#FFD0D0'
-        />
-      </TouchableOpacity>
-
-        <View style={styles.search}>
-
-          
+        <View style={styles.search}>     
         <SearchBar
         platform="ios"
         containerStyle={styles.inner}

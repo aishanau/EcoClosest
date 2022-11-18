@@ -8,16 +8,6 @@ import SearchBar from '../components/BrandSearch';
 import { Button } from '@rneui/themed';
 
 export default function ItemDetails({navigation, route}) {
-  // let details = {
-  //   item: '',
-  //   image: null,
-  //   brand: '',
-  //   category: '',
-  //   price: '',
-  //   colour: [],
-  //   fabric: [],
-  // }
-
   const [item, setItem] = useState(route.params.details.item == undefined ? '' : route.params.details.item);
   const [brand, setBrand] = useState(route.params.details.brand == undefined ? '' : route.params.details.brand);
   const [category, setCategory] = useState(route.params.details.category == undefined ? '' : route.params.details.category);
@@ -52,17 +42,21 @@ export default function ItemDetails({navigation, route}) {
     }
   }
 
-  // const setDetails = (key, value) => {
-  //   console.log(key, value);
-  //   details[key] = value;
-  //   console.log(details);
-  // }
-
   const edit = () => {
     setView(false);
   }
   const remove = () => {
-    // TODO: remove item from database
+    const index = global.clothes[category].findIndex(c => c.id == route.params.details.id);
+    global.clothes[category].splice(index, index+1);
+    if (global.clothes[category] = []) {
+      delete global.clothes[category];
+    }
+  }
+
+  const deleteItem = () => {
+    remove();
+    setDeleteModalVisible(!deleteModalVisible);
+    navigation.goBack();
   }
 
   const getView = () => {
@@ -79,17 +73,19 @@ export default function ItemDetails({navigation, route}) {
     setImage(route.params.details.image == undefined ? '' : route.params.details.image);
   }
 
-  // TODO: SAVE ITEM IN DATABASE
   const saveItem = () => {
-    // details = {
-    //   item: item,
-    //   image: image,
-    //   brand: brand,
-    //   category: category,
-    //   price: price,
-    //   colour: [...colour],
-    //   fabric: [...fabric],
-    // }
+    const details = {
+      item: item,
+      image: image,
+      brand: brand,
+      category: category,
+      price: price,
+      colour: [...colour],
+      fabric: [...fabric],
+      id: route.params.details.id
+    }
+    const index = global.clothes[category].findIndex(c => c.id == route.params.details.id);
+    global.clothes[category][index] = details;
   }
 
   return <ScrollView>
@@ -141,7 +137,7 @@ export default function ItemDetails({navigation, route}) {
               <Button
                 buttonStyle={styles.btn}
                 containerStyle={{margin: 10}}
-                onPress={() => {setDeleteModalVisible(!deleteModalVisible)}}
+                onPress={deleteItem}
               >
                 <Text style={styles.btnText}>Delete</Text>
               </Button>
