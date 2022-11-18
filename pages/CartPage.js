@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ScrollView, Saf } from 'react-native';
 
-import ItemCard from '../components/ItemCard';
+import CartItemCard from '../components/CartItemCard';
 import CartExceedingModal from "../components/CartExceedingModal";
 
 import { Button, ButtonGroup, withTheme } from '@rneui/themed';
@@ -29,13 +29,14 @@ export default function CartPage() {
     // update myItems
     setItems(newItems);
 
-  }, [])
+  },[])
 
   useEffect(() => {
     let t = 0
-    myItems.map((item) => (
+    for (let item of database['pants']) {
+      console.log(item.quantity);
       t = t + item.quantity*parseInt(item.price.substring(1))
-    ));
+    }
     setTotal(t)
     console.log(t)
   }, [quantity, database])
@@ -76,7 +77,7 @@ export default function CartPage() {
         <View style={styles.album}>
           {myItems.map((item, idx) => (
             <View key={idx}>
-              <ItemCard
+              <CartItemCard
                 database={database}
                 setDatabase={setDatabase}
                 quantity={quantity}

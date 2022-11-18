@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Image } from '@rneui/themed';
-import RnIncrementDecrementBtn from '../components/RnIncrementDecrementBtn/rnIncrementDecrementBtn';
+import RnIncrementDecrementBtn from './RnIncrementDecrementBtn/rnIncrementDecrementBtn';
 import { useState, useEffect } from 'react';
 import {Button} from 'react-native-paper';
 import {getDb, setDb} from '../index.js';
 
-const ItemCard = ({database, setDatabase, quantity, setQuantity, idx, name, icon, price, description}) => {
+const CartItemCard = ({database, setDatabase, quantity, setQuantity, idx, name, icon, price, description}) => {
 
   const updateQ = (event) => {
     setQuantity(event);
@@ -140,4 +140,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ItemCard;
+export default CartItemCard;

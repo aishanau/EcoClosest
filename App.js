@@ -11,8 +11,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       {/* <Checkout/> */}
-      {/* <CartPage/> */}
-      <CheckoutSuccess/>
+      <CartPage/>
+      {/* <CheckoutSuccess/> */}
     </View>
   );
 }
