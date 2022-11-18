@@ -15,6 +15,10 @@ export default function CartPage({navigation}) {
 
   const isFocused = useIsFocused();
 
+  const round2DP = (num) => {
+    return Math.round((num + Number.EPSILON) * 100) / 100;
+  }
+
   const [database, setDatabase] = useState(getDb());
   const [myItems, setItems] = useState([]);
   const [quantity, setQuantity] = useState(1)
@@ -68,11 +72,11 @@ export default function CartPage({navigation}) {
     let t = 0
     for (let item of database['pants']) {
       // console.log(item.quantity);
-      t = t + parseInt(item.quantity)*parseFloat(item.price.substring(1))
+      t = round2DP(t + parseInt(item.quantity)*parseFloat(item.price.substring(1)));
     }
     for (let item of database['jackets']) {
       console.log(t);
-      t = t + parseInt(item.quantity)*parseFloat(item.price.substring(1))
+      t = round2DP(t + parseInt(item.quantity)*parseFloat(item.price.substring(1)));
     }
     setTotal(t)
     console.log(t)
@@ -139,7 +143,7 @@ export default function CartPage({navigation}) {
           {myItems.map((item, idx) => (
             <View style={styles.itemTotal} key={idx}>
               <Text style={styles.priceText}>{item.quantity} x {item.name}</Text>
-              <Text style={styles.priceText}>${item.quantity*parseFloat(item.price.substring(1))} AUD</Text>
+              <Text style={styles.priceText}>${round2DP(item.quantity*parseFloat(item.price.substring(1)))} AUD</Text>
           </View>
           ))}
           <View
