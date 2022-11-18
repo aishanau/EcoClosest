@@ -70,7 +70,7 @@ import {
           >
             <View style={{ paddingBottom: 10 }}>
               <PrimaryButton
-                title={"Sign Up"}
+                title={"Login"}
                 onPress={handleLogin}
                 containerStyle={{ width: 250 }}
               />
