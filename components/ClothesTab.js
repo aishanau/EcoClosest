@@ -39,7 +39,7 @@ const ClothesTab = ({ navigation, route }) => {
     console.log(result);
 
     if (!result.canceled) {
-      console.log("hello");
+      // console.log("hello");
       navigation.navigate("Upload Item", { image: result.assets[0].uri });
       setModalVisible(false);
     }
@@ -53,7 +53,7 @@ const ClothesTab = ({ navigation, route }) => {
       quality: 1,
     });
 
-    console.log(result);
+    // console.log(result);
 
     if (!result.canceled) {
       navigation.navigate("Upload Item", { image: result.assets[0].uri });

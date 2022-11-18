@@ -20,7 +20,7 @@ export default function CategoryPage( {navigation, route} ) {
     const [modalVisible, setModalVisible] = useState(false);
     const [saleItems, setSaleItems] = useState([]);
 
-    console.log(value);
+    // console.log(value);
 
     useEffect(() => {
         if (value == 'Pants') {

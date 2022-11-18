@@ -19,14 +19,12 @@ const CartItemCard = ({database, setDatabase, quantity, setQuantity, idx, name, 
     // check if pant or jacket
     let result = database['pants'].findIndex(i => i.name === name);
     if (result >= 0) {
-      console.log('IS IT A PANT?')
       // it is a pant
       newDb['pants'][result]['quantity'] = parseInt(event);
     } else {
       result = database['jackets'].findIndex(i => i.name === name);
       // it is a jacket
       if (result >= 0) {
-        console.log('IS IT A JACKET?')
         newDb['jackets'][result]['quantity'] = parseInt(event);
       }
     }

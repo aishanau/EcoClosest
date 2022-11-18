@@ -75,11 +75,11 @@ export default function CartPage({navigation}) {
       t = round2DP(t + parseInt(item.quantity)*parseFloat(item.price.substring(1)));
     }
     for (let item of database['jackets']) {
-      console.log(t);
+      // console.log(t);
       t = round2DP(t + parseInt(item.quantity)*parseFloat(item.price.substring(1)));
     }
     setTotal(t)
-    console.log(t)
+    // console.log(t)
   }, [isFocused, quantity, database])
   
   // use effect to update items shown on page
@@ -98,7 +98,7 @@ export default function CartPage({navigation}) {
         newItems.push(item);
       }
     }
-    console.log(modalDisplay);
+    // console.log(modalDisplay);
     if (totalQuantity > limit) {
       setModalDisplay('flex');
     } else if (totalQuantity <= limit) {

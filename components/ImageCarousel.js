@@ -34,8 +34,8 @@ const ImageCarousel = ({ data, setIndex }) => {
   const [currIdx, setCurrIdx] = useState(0);
 
   useEffect(() => {
-    console.log("current index is: ", currentIndex.current);
-    console.log("curr idx: ", currIdx);
+    // console.log("current index is: ", currentIndex.current);
+    // console.log("curr idx: ", currIdx);
     setIndex(currIdx);
   }, [currentIndex.current, change]);
 

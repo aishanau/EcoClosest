@@ -12,7 +12,7 @@ export default ({navigation, val}) => {
   };
 
   const update = () => {
-    console.log(value)
+    // console.log(value)
     navigation.navigate("Results", {item: value})
   };
 
