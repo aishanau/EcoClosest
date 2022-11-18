@@ -4,55 +4,21 @@ import {
   View,
   ScrollView,
   Dimensions,
-  TouchableOpacity,
-  FlatList,
-  Image,
 } from "react-native";
-import React, { useEffect, useState, useRef, useCallback } from "react";
-import { outerwear, tops } from "../database";
+import React, { useEffect, useState, } from "react";
 import {
-  Button,
-  ButtonGroup,
-  withTheme,
-  Divider,
-  Icon,
   Dialog,
   CheckBox,
   Slider,
+  Input
 } from "@rneui/themed";
 
-// import PropTypes from "prop-types";
 import { MAIN_TEXT_COLOUR, PRIMARY_COLOUR } from "../styles";
 import ImageCarousel from "../components/ImageCarousel";
 import PrimaryButton from "../components/PrimaryButton";
 import MultiSelectBar from "../components/MultiSelect";
 import { clothingCategories } from "../database";
-// export const clothingCategories = [
-//   { category: "Outerwear", itemList: outerwear },
-//   { category: "Tops", itemList: tops },
-//   { category: "Accessories", itemList: accessories },
-// ];
 
-{
-  /* <Dialog
-isVisible={material_modal}
-onBackdropPress={toggle_material_modal}
->
-    <Dialog.Title title="Select Materials"/>
-    <View style={[styles.multiselect]}>
-        <MultiSelectBar items={materials} setItems={setMaterials}/>
-    </View>
-    <Dialog.Actions>
-        <Dialog.Button
-        title="CONFIRM"
-        onPress={() => {
-            toggle_material_modal();
-        }}
-        />
-        <Dialog.Button title="CANCEL" onPress={toggle_material_modal} />
-    </Dialog.Actions>
-</Dialog> */
-}
 const screenWidth = Dimensions.get("window").width;
 
 const CreateOutfitPage = ({ navigation, route }) => {
@@ -62,6 +28,16 @@ const CreateOutfitPage = ({ navigation, route }) => {
   const [displayTops, setDisplayTops] = useState(false);
   const [displayAccessories, setDisplayAccessories] = useState(false);
 
+  const [outfitName, setOutfitName] = useState("");
+
+  const [selectedOuterwear, setSelectedOuterwear] = useState(0);
+  const [selectedTops, setSelectedTops] = useState(0);
+  const [selectedAccessories, setSelectedAccessories] = useState(0);
+
+  const handleCreateOutfit = () => {
+    navigation.goBack();
+  }
+
   useEffect(() => {
     console.log("current selected categories are: ", selectedCategories);
 
@@ -69,6 +45,7 @@ const CreateOutfitPage = ({ navigation, route }) => {
     setDisplayTops(selectedCategories.includes("Tops"));
     setDisplayAccessories(selectedCategories.includes("Accessories"));
   }, [selectedCategories]);
+
   return (
     <>
       <Dialog
@@ -114,31 +91,48 @@ const CreateOutfitPage = ({ navigation, route }) => {
             padding: 20,
           }}
         >
+        <View style={{flexDirection: 'row', paddingHorizontal: 5, justifyContent: "space-evenly"}}>
           <PrimaryButton
             title={"Select Layers"}
             onPress={() => setAddLayerVisible(!addLayerVisible)}
-            containerStyle={{ width: "50%" }}
+            containerStyle={{ width: "49%" }}
           />
+          <PrimaryButton
+            title={"Create Outfit"}
+            onPress={handleCreateOutfit}
+            containerStyle={{ width: "49%" }}
+          />
+
         </View>
+        <Input
+          containerStyle={styles.input}
+          inputContainerStyle={{}}
+          label="Outfit Name"
+          placeholder="Give your outfit a name"
+          onChangeText={(input) => setOutfitName(input)}
+          value={outfitName.toString()}
+        />
+        </View>
+
 
         {displayOuterwear && (
           <View>
             <Text style={styles.title}>Outerwear</Text>
-            <ImageCarousel data={clothingCategories[0].itemList} />
+            <ImageCarousel data={clothingCategories[0].itemList} setIndex={setSelectedOuterwear} />
           </View>
         )}
 
         {displayTops && (
           <View>
             <Text style={styles.title}>Tops</Text>
-            <ImageCarousel data={clothingCategories[1].itemList} />
+            <ImageCarousel data={clothingCategories[1].itemList} setIndex={setSelectedTops} />
           </View>
         )}
 
         {displayAccessories && (
           <View>
             <Text style={styles.title}>Accessories</Text>
-            <ImageCarousel data={clothingCategories[2].itemList} />
+            <ImageCarousel data={clothingCategories[2].itemList} setIndex={setSelectedAccessories} />
           </View>
         )}
       </ScrollView>
@@ -173,7 +167,6 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     margin: 12,
-    borderWidth: 1,
     padding: 10,
   },
 });

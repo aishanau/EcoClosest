@@ -22,7 +22,7 @@ const EMPTY_ITEM_LENGTH = (width - ITEM_LENGTH) / 2;
 const BORDER_RADIUS = 20;
 const CURRENT_ITEM_TRANSLATE_Y = 48;
 
-const ImageCarousel = ({ data }) => {
+const ImageCarousel = ({ data, setIndex }) => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const [dataWithPlaceholders, setDataWithPlaceholders] = useState([]);
   const currentIndex = useRef(0);
@@ -36,6 +36,7 @@ const ImageCarousel = ({ data }) => {
   useEffect(() => {
     console.log("current index is: ", currentIndex.current);
     console.log("curr idx: ", currIdx);
+    setIndex(currIdx);
   }, [currentIndex.current, change]);
 
   //   useEffect(() => {
