@@ -8,15 +8,17 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Dialog, CheckBox, Slider, Input } from "@rneui/themed";
+import { useNavigation } from '@react-navigation/native';
+
 
 import { MAIN_TEXT_COLOUR, PRIMARY_COLOUR } from "../styles";
-import ImageCarousel from "../components/ImageCarousel";
+
 import PrimaryButton from "../components/PrimaryButton";
-import MultiSelectBar from "../components/MultiSelect";
-import { clothingCategories } from "../database";
 import SecondaryButton from "../components/SecondaryButton";
 
-const SignUp = ({ isSignedIn, setIsSignedIn, navigation }) => {
+const SignUp = ({ isSignedIn, setIsSignedIn }) => {
+  const navigation = useNavigation();
+
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
