@@ -3,9 +3,11 @@ import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { PRIMARY_COLOUR } from "../styles";
 import OutfitCard from "./OutfitCard";
 
-const OutfitCategoryList = ({ category, list }) => {
-
-//   useEffect(() => {console.log("list in outfit category list is ", list, category)}, [])  
+const OutfitCategoryList = ({ category, list, navigation, details }) => {
+  useEffect(() => {
+    console.log("details in OutfitCategoryList ", details);
+  }, []);
+  //   useEffect(() => {console.log("list in outfit category list is ", list, category)}, [])
   return (
     <>
       <View style={styles.titleContainer}>
@@ -13,12 +15,8 @@ const OutfitCategoryList = ({ category, list }) => {
       </View>
       <View style={styles.album}>
         <ScrollView horizontal={true}>
-          {list.map(({ name, image, outerwear, tops, accessories }, idx) => (
-            <OutfitCard
-              key={idx}
-              item={name}
-              image={image}
-            />
+          {list.map((item, idx) => (
+            <OutfitCard key={idx} navigation={navigation} details={item} />
           ))}
         </ScrollView>
       </View>
