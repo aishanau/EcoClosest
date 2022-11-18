@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView, TextInput } from "react-native";
 import Dropdown from "../components/Dropdown";
-import { CheckBox } from "react-native-paper";
+// import { CheckBox } from "react-native-paper";
 
 import { Button, ButtonGroup, withTheme } from '@rneui/themed';
 
@@ -24,7 +24,7 @@ export default function Checkout({navigation, route}) {
   const [expiry, onChangeExpiry] = React.useState("");
 
   // checkbox
-  const [isSelected, setSelection] = useState(false);
+  const [checked, setChecked] = React.useState(false);
 
   return (
     <ScrollView style={styles.container} vertical={true}>
@@ -122,11 +122,12 @@ export default function Checkout({navigation, route}) {
 
         <View style={styles.container}>
           <View style={styles.checkboxContainer}>
-            <CheckBox
-              value={isSelected}
-              onValueChange={setSelection}
-              style={styles.checkbox}
-            />
+              {/* <Checkbox
+                status={checked ? 'checked' : 'unchecked'}
+                onPress={() => {
+                  setChecked(!checked);
+                }}
+              /> */}
             <Text style={styles.label}>Billing Address is same as Shipping Address</Text>
           </View>
         </View>
