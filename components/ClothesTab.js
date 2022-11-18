@@ -7,22 +7,24 @@ import {
   Modal,
   Text,
 } from "react-native";
-import { clothingCategories } from "../database";
 import { PRIMARY_COLOUR, SECONDARY_COLOUR } from "../styles";
 import CategoryList from "./CategoryList";
 import PrimaryButton from "./PrimaryButton";
 import SecondaryButton from "./SecondaryButton";
-import * as ImagePicker from "expo-image-picker";
+import * as ImagePicker from 'expo-image-picker';
+import '../database.js';
+import { useIsFocused } from "@react-navigation/native";
 
 const screenWidth = Dimensions.get("window").width;
 
 const ClothesTab = ({ navigation, route }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [image, setImage] = useState(null);
-  const [statusCamera, requestPermissionCamera] =
-    ImagePicker.useCameraPermissions();
-  const [statusLib, requestPermissionLib] =
-    ImagePicker.useMediaLibraryPermissions();
+  const [statusCamera, requestPermissionCamera] = ImagePicker.useCameraPermissions();
+  const [statusLib, requestPermissionLib] = ImagePicker.useMediaLibraryPermissions();
+  const isFocused = useIsFocused();
+
+  useEffect(() => {}, [isFocused]);
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -127,15 +129,16 @@ const ClothesTab = ({ navigation, route }) => {
         <View style={styles.buttonContainer}>
           <PrimaryButton title={"Add New Item"} onPress={addItemEvent} />
         </View>
-
-        {clothingCategories.map((item, idx) => (
+        <View style={{paddingBottom: 70}}>
+        {Object.entries(global.clothes).map(([key, value], idx) => (
           <CategoryList
             navigation={navigation}
             key={idx}
-            category={item.category}
-            itemList={item.itemList}
+            category={key}
+            itemList={value}
           />
         ))}
+        </View>
       </ScrollView>
     </>
   );

@@ -17,43 +17,13 @@ import SearchBar from "../components/BrandSearch";
 import { Button } from "@rneui/themed";
 
 export default function ItemDetails({ navigation, route }) {
-  // let details = {
-  //   item: '',
-  //   image: null,
-  //   brand: '',
-  //   category: '',
-  //   price: '',
-  //   colour: [],
-  //   fabric: [],
-  // }
-
-  const [item, setItem] = useState(
-    route.params.details.item == undefined ? "" : route.params.details.item
-  );
-  const [brand, setBrand] = useState(
-    route.params.details.brand == undefined ? "" : route.params.details.brand
-  );
-  const [category, setCategory] = useState(
-    route.params.details.category == undefined
-      ? ""
-      : route.params.details.category
-  );
-  const [price, setPrice] = useState(
-    route.params.details.price == undefined ? "" : route.params.details.price
-  );
-  const [colour, setColour] = useState(
-    route.params.details.colour == undefined
-      ? []
-      : [...route.params.details.colour]
-  );
-  const [fabric, setFabric] = useState(
-    route.params.details.fabric == undefined
-      ? []
-      : [...route.params.details.fabric]
-  );
-  const [image, setImage] = useState(
-    route.params.details.image == undefined ? "" : route.params.details.image
-  );
+  const [item, setItem] = useState(route.params.details.item == undefined ? "" : route.params.details.item);
+  const [brand, setBrand] = useState(route.params.details.brand == undefined ? "" : route.params.details.brand);
+  const [category, setCategory] = useState(route.params.details.category == undefined ? "" : route.params.details.category);
+  const [price, setPrice] = useState(route.params.details.price == undefined ? "" : route.params.details.price);
+  const [colour, setColour] = useState(route.params.details.colour == undefined ? [] : [...route.params.details.colour]);
+  const [fabric, setFabric] = useState(route.params.details.fabric == undefined ? [] : [...route.params.details.fabric]);
+  const [image, setImage] = useState(route.params.details.image == undefined ? "" : route.params.details.image);
 
   const [brandModalVisible, setBrandModalVisible] = useState(false);
   const [brandSearch, setBrandSearch] = useState("");
@@ -81,65 +51,52 @@ export default function ItemDetails({ navigation, route }) {
     }
   };
 
-  // const setDetails = (key, value) => {
-  //   console.log(key, value);
-  //   details[key] = value;
-  //   console.log(details);
-  // }
-
   const edit = () => {
     setView(false);
   };
   const remove = () => {
-    // TODO: remove item from database
-  };
+    const index = global.clothes[category].findIndex(c => c.id == route.params.details.id);
+    global.clothes[category].splice(index, index+1);
+    console.log(global.clothes[category]);
+    if (global.clothes[category] == []) {
+      delete global.clothes[category];
+    }
+  }
+
+  const deleteItem = () => {
+    remove();
+    setDeleteModalVisible(!deleteModalVisible);
+    navigation.goBack();
+  }
 
   const getView = () => {
     return view ? "visible" : "hidden";
   };
 
   const resetItem = () => {
-    setItem(
-      route.params.details.item == undefined ? "" : route.params.details.item
-    );
-    setBrand(
-      route.params.details.brand == undefined ? "" : route.params.details.brand
-    );
-    setCategory(
-      route.params.details.category == undefined
-        ? ""
-        : route.params.details.category
-    );
-    setPrice(
-      route.params.details.price == undefined ? "" : route.params.details.price
-    );
-    setColour(
-      route.params.details.colour == undefined
-        ? []
-        : [...route.params.details.colour]
-    );
-    setFabric(
-      route.params.details.fabric == undefined
-        ? []
-        : [...route.params.details.fabric]
-    );
-    setImage(
-      route.params.details.image == undefined ? "" : route.params.details.image
-    );
+    setItem(route.params.details.item == undefined ? "" : route.params.details.item);
+    setBrand(route.params.details.brand == undefined ? "" : route.params.details.brand);
+    setCategory(route.params.details.category == undefined ? "" : route.params.details.category);
+    setPrice(route.params.details.price == undefined ? "" : route.params.details.price);
+    setColour(route.params.details.colour == undefined ? [] : [...route.params.details.colour]);
+    setFabric(route.params.details.fabric == undefined ? [] : [...route.params.details.fabric]);
+    setImage(route.params.details.image == undefined ? "" : route.params.details.image);
   };
 
-  // TODO: SAVE ITEM IN DATABASE
   const saveItem = () => {
-    // details = {
-    //   item: item,
-    //   image: image,
-    //   brand: brand,
-    //   category: category,
-    //   price: price,
-    //   colour: [...colour],
-    //   fabric: [...fabric],
-    // }
-  };
+    const details = {
+      item: item,
+      image: image,
+      brand: brand,
+      category: category,
+      price: price,
+      colour: [...colour],
+      fabric: [...fabric],
+      id: route.params.details.id
+    }
+    const index = global.clothes[category].findIndex(c => c.id == route.params.details.id);
+    global.clothes[category][index] = details;
+  }
 
   return (
     <ScrollView>
@@ -159,97 +116,58 @@ export default function ItemDetails({ navigation, route }) {
                 {/* <TouchableOpacity>
                 <Icon name="arrowleft" type="antdesign"/>
               </TouchableOpacity> */}
-                <TouchableOpacity
-                  onPress={() => {
-                    setDeleteModalVisible(true);
-                  }}
-                  style={{ backfaceVisibility: getView() }}
-                >
-                  <Icon name="trash" type="evilicon" size="35" />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={edit}
-                  style={{ marginRight: 10, backfaceVisibility: getView() }}
-                >
-                  <Icon name="pencil" type="evilicon" size="35" />
-                </TouchableOpacity>
-              </>
-            ) : (
-              /* Edit Heading */
-              <>
-                <TouchableOpacity
-                  onPress={() => {
-                    setView(true);
-                    resetItem();
-                  }}
-                >
-                  <Text>Cancel</Text>
-                </TouchableOpacity>
-                <Button
-                  buttonStyle={styles.btn}
-                  containerStyle={{
-                    backfaceVisibility: !getView(),
-                  }}
-                >
-                  <Text
-                    style={styles.btnText}
-                    onPress={() => {
-                      setView(true);
-                      saveItem();
-                    }}
-                  >
-                    Save
-                  </Text>
-                </Button>
-              </>
-            )}
-          </View>
-          {/* <Text style={styles.heading}>Add Details</Text> */}
-          {/* DELETE MODAL */}
-          <Modal
-            transparent
-            visible={deleteModalVisible}
-            onRequestClose={() => {
-              Alert.alert("Modal has been closed.");
-              setDeleteModalVisible(!deleteModalVisible);
-            }}
-          >
-            <View
-              style={[
-                styles.modalOverlay,
-                { justifyContent: "center", margin: 15 },
-              ]}
-            >
-              <View
-                style={[
-                  styles.modalView,
-                  { padding: 35, alignItems: "center" },
-                ]}
+              <TouchableOpacity onPress={() => {setDeleteModalVisible(true)}} style={{backfaceVisibility: getView()}}>
+                <Icon name="trash" type="evilicon" size='35'/>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={edit} style={{marginRight: 10, backfaceVisibility: getView()}}>
+                <Icon name="pencil" type="evilicon" size='35'/>
+              </TouchableOpacity>
+            </>)
+          /* Edit Heading */
+          : (<>
+              <TouchableOpacity onPress={() => {setView(true); resetItem()}}>
+                <Text>Cancel</Text>
+              </TouchableOpacity>
+              <Button 
+                buttonStyle={styles.btn}
+                containerStyle={{
+                    backfaceVisibility: !getView()
+                }}
               >
-                <Text style={{ margin: 10 }}>
-                  Are you sure you want to delete?
-                </Text>
-                <Button
-                  buttonStyle={styles.btn}
-                  containerStyle={{ margin: 10 }}
-                  onPress={() => {
-                    setDeleteModalVisible(!deleteModalVisible);
-                  }}
-                >
-                  <Text style={styles.btnText}>Delete</Text>
-                </Button>
-                <Button
-                  buttonStyle={[styles.btn, { backgroundColor: "grey" }]}
-                  containerStyle={{ margin: 10 }}
-                  onPress={() => {
-                    setDeleteModalVisible(!deleteModalVisible);
-                  }}
-                >
-                  <Text style={styles.btnText}>Cancel</Text>
-                </Button>
-              </View>
+                <Text style={styles.btnText} onPress={() => {setView(true); saveItem()}}>Save</Text>
+              </Button>
+            </>)}
+        </View>
+        {/* <Text style={styles.heading}>Add Details</Text> */}
+        {/* DELETE MODAL */}
+        <Modal
+          transparent
+          visible={deleteModalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+            setDeleteModalVisible(!deleteModalVisible);
+          }}
+        >
+          <View style={[styles.modalOverlay, {justifyContent: 'center', margin: 15}]}>
+            <View style={[styles.modalView, {padding: 35, alignItems: 'center'}]}>
+              <Text style={{margin: 10}}>Are you sure you want to delete?</Text>
+              <Button
+                buttonStyle={styles.btn}
+                containerStyle={{margin: 10}}
+                onPress={deleteItem}
+              >
+                <Text style={styles.btnText}>Delete</Text>
+              </Button>
+              <Button
+                buttonStyle={[styles.btn, {backgroundColor: 'grey'}]}
+                containerStyle={{margin: 10}}
+                onPress={() => {setDeleteModalVisible(!deleteModalVisible)}}
+              >
+                <Text style={styles.btnText}>Cancel</Text>
+              </Button>
             </View>
-          </Modal>
+          </View>
+        </Modal>
         </View>
         <Image
           source={{ uri: image }}
@@ -276,15 +194,8 @@ export default function ItemDetails({ navigation, route }) {
             value={item}
             disabled={view}
           />
-          {/* <Divider/> */}
 
           {/* BRAND MODAL */}
-          {/* <ListItem.Swipeable style={{padding: 0}}>
-          <ListItem.Content> */}
-
-          {/* </ListItem.Content>
-          <ListItem.Chevron />
-        </ListItem.Swipeable> */}
           <TouchableOpacity
             onPress={() => {
               !view && setBrandModalVisible(!brandModalVisible);
