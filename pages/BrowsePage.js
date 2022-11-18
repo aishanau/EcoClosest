@@ -73,14 +73,14 @@ export default function BrowsePage( {navigation} ) {
             horizontal={true}
             >
             {saleItems.map((item, idx) => (
-                <ItemCard
-                key={idx}
-                navigation={navigation}
-                details={item}
-                // name={item.name}
-                // price={item.price}
-                // icon={item.icon}
-                />
+              <ItemCard
+              key={idx}
+              navigation={navigation}
+              details={item}
+              // name={item.name}
+              // price={item.price}
+              // icon={item.icon}
+              />
       ))}
             </ScrollView>
         </View>
@@ -93,17 +93,14 @@ export default function BrowsePage( {navigation} ) {
             horizontal={true}
             >
             {saleItems.map((item, idx) => (
-                <>
-                {console.log(item)}
-                <ItemCard
-                key={idx}
-                navigation={navigation}
-                details={item}
-                // name={item.name}
-                // price={item.price}
-                // icon={item.icon}
-                />
-                </>
+              <ItemCard
+              key={idx}
+              navigation={navigation}
+              details={item}
+              // name={item.name}
+              // price={item.price}
+              // icon={item.icon}
+              />
                 
       ))}
             </ScrollView>

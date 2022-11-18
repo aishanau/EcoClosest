@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Modal, SectionList, FlatList} from 'react-native';
 import { Icon, Image, ListItem, Divider} from '@rneui/themed';
 import { Input } from "@rneui/base";
@@ -38,8 +38,40 @@ export default function UploadItem({navigation, route}) {
     }
   }
 
+  const fieldReset = () => {
+    setItem('');
+    setBrand('');
+    setCategory('');
+    setPrice('');
+    setColour([]);
+    setFabric([]);
+  }
+
   const uploadDetails = () => {
-    // TODO: UPLOAD ITEM TO DATABASE
+    const details = {
+      item: item,
+      brand: brand,
+      category: category,
+      price: price,
+      colour: colour,
+      fabric: fabric,
+      image: route.params.image,
+    }
+    console.log(details);
+    console.log(Object.keys(global.clothes));
+    if (Object.keys(global.clothes).includes(category)) {
+      const lastIndex = global.clothes[category].length - 1;
+      details['id'] = global.clothes[category][lastIndex].id + 1;
+      global.clothes[category].push(details);
+      console.log('pushed');
+    } else {
+      details['id'] = 1;
+      global.clothes[category] = [details];
+      console.log('created');
+    }
+    console.log(global.clothes);
+    fieldReset();
+    navigation.goBack();
   }
 
   return <ScrollView>
