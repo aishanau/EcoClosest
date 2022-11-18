@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView, TextInput } from "react-native";
 import Dropdown from "../components/Dropdown";
-import { CheckBox } from "react-native";
+import { CheckBox } from "react-native-paper";
 
 import { Button, ButtonGroup, withTheme } from '@rneui/themed';
 
@@ -36,7 +36,7 @@ export default function Checkout({navigation, route}) {
 
         <View style={styles.section}>
           <Text style={styles.title}>1. Personal Details</Text>
-          <hr />
+          {/* <Text>.{'\n'}</Text> */}
           <SafeAreaView style={styles.splitTwo}>
             <TextInput
               style={styles.input}
@@ -49,7 +49,7 @@ export default function Checkout({navigation, route}) {
 
         <View style={styles.section}>
             <Text style={styles.title}>2. Shipping</Text>
-            <hr />
+            {/* <Text>.{'\n'}</Text> */}
             <SafeAreaView style={styles.splitTwo}>
               <TextInput
                 style={styles.input}
@@ -116,7 +116,7 @@ export default function Checkout({navigation, route}) {
               />
             </SafeAreaView>
             <Text style={styles.subheading}>Select Shipping Method</Text>
-            <hr />
+            {/* <Text>.{'\n'}</Text> */}
             <Dropdown> </Dropdown>
         </View>
 
@@ -133,7 +133,7 @@ export default function Checkout({navigation, route}) {
 
         <View style={styles.section}>
           <Text style={styles.title}>3. Payment Details</Text>
-          <hr />
+          {/* <Text>.{'\n'}</Text> */}
           <View style={styles.splitTwo}>
             {/* payment icons */}
             <TouchableOpacity
@@ -174,7 +174,7 @@ export default function Checkout({navigation, route}) {
               />
             </TouchableOpacity>
           </View>
-          <hr />
+          {/* <Text>.{'\n'}</Text> */}
           {/* card details */}
           <TextInput
               style={styles.input}
@@ -208,7 +208,7 @@ export default function Checkout({navigation, route}) {
               <Text style={styles.subheading}>Promo Code</Text>
               <Text>{'Select promo code >'}</Text>
         </View>
-        <hr />
+        {/* <Text>.{'\n'}</Text> */}
         <View style={styles.splitTwo}>
               <Text style={styles.subheading}>Total</Text>
               <Text>${total} AUD</Text>
@@ -271,16 +271,19 @@ const styles = StyleSheet.create({
     fontSize: '16px',
     fontWeight: '600',
     // textAlign: 'center',
+    marginBottom: 10,
   },
   subheading: {
     fontColor: '#FB5C5C',
     fontSize: '15px',
     fontWeight: '500',
+    marginBottom: 10,
   },
   section: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-evenly'
+    justifyContent: 'space-evenly',
+    marginBottom: 15,
   },
   input: {
     height: 40,
@@ -298,6 +301,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'space-between',
     justifyContent: 'space-between',
+    marginBottom: 10,
     // alignSelf : 'center',
   },
   checkcontainer: {

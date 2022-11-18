@@ -1,5 +1,5 @@
-import CartPage from './pages/CartPage'
-import Checkout from './pages/Checkout'
+import CartPage from './pages/CartPage';
+import Checkout from './pages/Checkout';
 import CheckoutSuccess from './pages/CheckoutSuccess';
 import WardrobePage from './pages/WardrobePage';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";

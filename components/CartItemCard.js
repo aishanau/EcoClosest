@@ -35,14 +35,15 @@ const CartItemCard = ({database, setDatabase, quantity, setQuantity, idx, name, 
   const deleteItem = (quan) => {
     setQuantity(quan);
     const newDb = database;
-    if (result == idx) {
+    let result = database['pants'].findIndex(i => i.name === name);
+    if (result >= 0) {
       // it is a pant
-      newDb['pants'][idx]['quantity'] = parseInt(quan)
+      newDb['pants'][result]['quantity'] = parseInt(quan)
     } else {
       result = database['jackets'].findIndex(i => i.name === name);
       // it is a jacket
-      if (result == idx) {
-        newDb['jackets'][idx]['quantity'] = parseInt(quan)
+      if (result >= 0) {
+        newDb['jackets'][result]['quantity'] = parseInt(quan)
       }
     }
     setDatabase(newDb);
@@ -59,7 +60,7 @@ const CartItemCard = ({database, setDatabase, quantity, setQuantity, idx, name, 
     <View elevation={10} style={[styles.container, styles.shadowProp]}>
       <View style={styles.leftImage}>
         <Image
-          style={{ width: 140, height: 140, resizeMode: 'cover', }}
+          style={{ width: 100, height: 100, resizeMode: 'cover', }}
           source={{
             uri: icon
           }} />
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     // borderColor: '#FFD0D0',
     borderRadius: 20,
-    width: '60%',
+    width: '95%',
     alignSelf: 'center',
     backgroundColor: 'white',  
   },
@@ -122,6 +123,8 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRightWidth: 2,
     borderColor: '#eeeeee',
+    alignSelf: 'center',
+    justifyContent: 'center',
   },
   rightInfo: { 
     width: '65%',
@@ -142,9 +145,11 @@ const styles = StyleSheet.create({
   productTitle: {
     fontSize: '20px',
     fontWeight: '500',
+    marginBottom: 10,
   },
   productInfo: {
     alignSelf: 'flex-start',
+    marginBottom: 20,
   },
   productNumbers: {
     display: 'flex',

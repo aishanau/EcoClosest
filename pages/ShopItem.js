@@ -28,7 +28,7 @@ export default function ShopItem({navigation, route}) {
     setAlertVisible(true);
     setTimeout(() => {
       setAlertVisible(false);
-    }, 5000);
+    }, 3000);
     
   }
 
