@@ -9,8 +9,8 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { PRIMARY_COLOUR } from "./styles";
 import CreateOutfitPage from "./pages/CreateOutfitPage";
+import React, { useState } from "react";
 
-import PropTypes from "prop-types";
 
 const RootStack = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -23,11 +23,16 @@ import BrowsePage from './pages/BrowsePage';
 import ResultsPage from './pages/ResultsPage';
 import AccountPage from './pages/AccountPage';
 import CategoryPage from './pages/CategoryPage';
+import SignUp from './pages/SignUp';
 
 import titles from './index.js';
 import ViewOutfit from "./pages/ViewOutfit";
 
+
+
 export default function App() {
+
+  const [isSignedIn, setIsSignedIn] = useState(false);
 
   const TabsNav = () => (
     <Tabs.Navigator screenOptions={{ headerShown: false }}>
@@ -70,6 +75,8 @@ export default function App() {
   };
   return (
     <NavigationContainer>
+
+      {isSignedIn && 
       <RootStack.Navigator initialRouteName="EcoCloset">
         <RootStack.Screen name="Wardrobe" component={WardrobePage} />
         <RootStack.Screen name="Cart" component={SamplePage} />
@@ -83,7 +90,16 @@ export default function App() {
         <RootStack.Screen name="Results" component={ResultsPage} options={{ title: "Results" }}/>
         <RootStack.Screen name="Category" component={CategoryPage} options={{ title: "Category" }}/>
         <RootStack.Screen name="EcoCloset" component={TabsNav} />
-      </RootStack.Navigator>
+      </RootStack.Navigator>}
+      {!isSignedIn && 
+        <RootStack.Navigator initialRouteName="Sign Up">
+        <RootStack.Screen 
+        name="Sign Up" 
+        children={()=><SignUp setIsSignedIn={setIsSignedIn}/>}
+         />
+      </RootStack.Navigator>}
+      
+
     </NavigationContainer>
   );
 }
