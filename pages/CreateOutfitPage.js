@@ -98,7 +98,7 @@ const CreateOutfitPage = ({ navigation, route }) => {
             containerStyle={{ width: "49%" }}
           />
           <PrimaryButton
-            title={"Create Outfit"}
+            title={"Save Outfit"}
             onPress={handleCreateOutfit}
             containerStyle={{ width: "49%" }}
           />
