@@ -9,7 +9,11 @@ import { Button, ButtonGroup, withTheme } from '@rneui/themed';
 
 import { getDb, setDb } from '../index.js';
 
-export default function CartPage() {
+import { useIsFocused } from "@react-navigation/native";
+
+export default function CartPage({navigation}) {
+
+  const isFocused = useIsFocused();
 
   const [database, setDatabase] = useState(getDb());
   const [myItems, setItems] = useState([]);
@@ -22,6 +26,13 @@ export default function CartPage() {
   useEffect(() => {
     let newItems = []
     for (let item of database['pants']) {
+      // console.log(item);
+      if (item.quantity > 0) {
+        newItems.push(item);
+      }
+    }
+    for (let item of database['jackets']) {
+      // console.log(item);
       if (item.quantity > 0) {
         newItems.push(item);
       }
@@ -31,21 +42,53 @@ export default function CartPage() {
 
   },[])
 
+  // Update items on page
+  useEffect(() => { 
+    if (isFocused) { 
+      let newItems = []
+      for (let item of database['pants']) {
+        // console.log(item);
+        if (item.quantity > 0) {
+          newItems.push(item);
+        }
+      }
+      for (let item of database['jackets']) {
+        // console.log(item);
+        if (item.quantity > 0) {
+          newItems.push(item);
+        }
+      }
+      // update myItems
+      setItems(newItems);
+    }
+  }, [isFocused]);
+
+  // Update total when refresh page
   useEffect(() => {
     let t = 0
     for (let item of database['pants']) {
-      console.log(item.quantity);
-      t = t + item.quantity*parseInt(item.price.substring(1))
+      // console.log(item.quantity);
+      t = t + parseInt(item.quantity)*parseFloat(item.price.substring(1))
+    }
+    for (let item of database['jackets']) {
+      console.log(t);
+      t = t + parseInt(item.quantity)*parseFloat(item.price.substring(1))
     }
     setTotal(t)
     console.log(t)
-  }, [quantity, database])
+  }, [isFocused, quantity, database])
   
   // use effect to update items shown on page
   useEffect(() => {
     let newItems = []
     let totalQuantity = 0
     for (let item of database['pants']) {
+      if (item.quantity > 0) {
+        totalQuantity = totalQuantity + item.quantity;
+        newItems.push(item);
+      }
+    }
+    for (let item of database['jackets']) {
       if (item.quantity > 0) {
         totalQuantity = totalQuantity + item.quantity;
         newItems.push(item);
@@ -60,7 +103,7 @@ export default function CartPage() {
     // update myItems
     setItems(newItems);
 
-  }, [quantity, database])
+  }, [isFocused, total, quantity])
 
   return (
     <ScrollView style={styles.container} vertical={true}>
@@ -75,7 +118,7 @@ export default function CartPage() {
         />
 
         <View style={styles.album}>
-          {myItems.map((item, idx) => (
+          {myItems.reverse().map((item, idx) => (
             <View key={idx}>
               <CartItemCard
                 database={database}
@@ -96,7 +139,7 @@ export default function CartPage() {
           {myItems.map((item, idx) => (
             <View style={styles.itemTotal} key={idx}>
               <Text style={styles.priceText}>{item.quantity} x {item.name}</Text>
-              <Text style={styles.priceText}>${item.quantity*parseInt(item.price.substring(1))} AUD</Text>
+              <Text style={styles.priceText}>${item.quantity*parseFloat(item.price.substring(1))} AUD</Text>
           </View>
           ))}
           <View
@@ -126,7 +169,7 @@ export default function CartPage() {
               marginVertical: 10,
               alignSelf: 'center',
             }}
-            onPress={() => console.log('aye')}
+            onPress={() => navigation.navigate("Checkout", {total: total})}
           />
     </ScrollView>
 

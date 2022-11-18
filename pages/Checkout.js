@@ -6,7 +6,8 @@ import { CheckBox } from "react-native";
 
 import { Button, ButtonGroup, withTheme } from '@rneui/themed';
 
-export default function Checkout() {
+export default function Checkout({navigation, route}) {
+  const {total} = route.params;
   
   const [email, onChangeEmail] = React.useState("");
   const [fname, onChangefname] = React.useState("");
@@ -210,13 +211,13 @@ export default function Checkout() {
         <hr />
         <View style={styles.splitTwo}>
               <Text style={styles.subheading}>Total</Text>
-              <Text>$200.00 AUD</Text>
+              <Text>${total} AUD</Text>
         </View>
 
         {/*confirm button*/}
         <View style={{ paddingTop: 20, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
           <Button
-            title="Checkout"
+            title="Confirm Order"
             loading={false}
             loadingProps={{ size: 'small', color: 'white' }}
             buttonStyle={styles.btnYES}
@@ -227,7 +228,7 @@ export default function Checkout() {
               width: 200,
               marginVertical: 10,
             }}
-            onPress={() => console.log('aye')}
+            onPress={() => navigation.navigate("Checkout Success")}
           />
 
           <Button
@@ -242,7 +243,7 @@ export default function Checkout() {
               width: 200,
               marginVertical: 10,
             }}
-            onPress={() => console.log('aye')}
+            onPress={() => navigation.navigate("Shop")}
           />
         </View>
 

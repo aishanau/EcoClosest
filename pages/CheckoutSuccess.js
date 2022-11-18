@@ -48,7 +48,7 @@ export default () => {
           width: 200,
           marginVertical: 10,
         }}
-        onPress={() => console.log('Continue Shopping, go back to shop page')}
+        onPress={() => navigation.navigate("Shop")}
       />
     </View>
    

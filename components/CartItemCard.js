@@ -6,12 +6,30 @@ import { useState, useEffect } from 'react';
 import {Button} from 'react-native-paper';
 import {getDb, setDb} from '../index.js';
 
+import { useIsFocused } from "@react-navigation/native";
+
 const CartItemCard = ({database, setDatabase, quantity, setQuantity, idx, name, icon, price, description}) => {
+
+  const isFocused = useIsFocused();
+  const [item, setItem] = useState({});
 
   const updateQ = (event) => {
     setQuantity(event);
     const newDb = database;
-    newDb['pants'][idx]['quantity'] = parseInt(event)
+    // check if pant or jacket
+    let result = database['pants'].findIndex(i => i.name === name);
+    if (result >= 0) {
+      console.log('IS IT A PANT?')
+      // it is a pant
+      newDb['pants'][result]['quantity'] = parseInt(event);
+    } else {
+      result = database['jackets'].findIndex(i => i.name === name);
+      // it is a jacket
+      if (result >= 0) {
+        console.log('IS IT A JACKET?')
+        newDb['jackets'][result]['quantity'] = parseInt(event);
+      }
+    }
     setDatabase(newDb);
     setDb(database);
   }
@@ -19,7 +37,16 @@ const CartItemCard = ({database, setDatabase, quantity, setQuantity, idx, name, 
   const deleteItem = (quan) => {
     setQuantity(quan);
     const newDb = database;
-    newDb['pants'][idx]['quantity'] = parseInt(event)
+    if (result == idx) {
+      // it is a pant
+      newDb['pants'][idx]['quantity'] = parseInt(quan)
+    } else {
+      result = database['jackets'].findIndex(i => i.name === name);
+      // it is a jacket
+      if (result == idx) {
+        newDb['jackets'][idx]['quantity'] = parseInt(quan)
+      }
+    }
     setDatabase(newDb);
     setDb(database);
   }
@@ -27,7 +54,8 @@ const CartItemCard = ({database, setDatabase, quantity, setQuantity, idx, name, 
   useEffect(() => {
     setDb(database);
   }, [database])
-  
+
+
   return (
     <>
     <View elevation={10} style={[styles.container, styles.shadowProp]}>
