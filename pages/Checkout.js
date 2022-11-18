@@ -52,13 +52,13 @@ export default function Checkout({navigation, route}) {
             {/* <Text>.{'\n'}</Text> */}
             <SafeAreaView style={styles.splitTwo}>
               <TextInput
-                style={styles.input}
+                style={styles.input2}
                 onChangeText={onChangefname}
                 value={fname}
                 placeholder="First Name"
               />
               <TextInput
-                style={styles.input}
+                style={styles.input2}
                 onChangeText={onChangelname}
                 value={lname}
                 placeholder="Last Name"
@@ -94,13 +94,13 @@ export default function Checkout({navigation, route}) {
             </SafeAreaView>
             <SafeAreaView style={styles.splitTwo}>
               <TextInput
-                style={styles.input}
+                style={styles.input2}
                 onChangeText={onChangeCountry}
                 value={country}
                 placeholder="Country"
               />
               <TextInput
-                style={styles.input}
+                style={styles.input2}
                 onChangeText={onChangeState}
                 value={state}
                 placeholder="State"
@@ -187,7 +187,7 @@ export default function Checkout({navigation, route}) {
             />
           <SafeAreaView style={styles.splitTwo}>
             <TextInput
-              style={styles.input}
+              style={styles.input2}
               onChangeText={onChangeCvv}
               value={cvv}
               placeholder="CVV"
@@ -195,7 +195,7 @@ export default function Checkout({navigation, route}) {
               secureTextEntry={true}
             />
             <TextInput
-              style={styles.input}
+              style={styles.input2}
               onChangeText={onChangeExpiry}
               value={expiry}
               placeholder="Expiry (MM/YY)"
@@ -293,6 +293,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     width: '100%',
+    borderRadius: '7px',
+  },
+  input2: {
+    height: 40,
+    // margin: 12,
+    marginBottom: 15,
+    borderWidth: 1,
+    padding: 10,
+    width: '50%',
     borderRadius: '7px',
   },
   splitTwo: {
