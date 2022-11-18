@@ -7,7 +7,7 @@ import SetLimitPage from './SetLimitPage';
 
 const screenWidth = Dimensions.get("window").width;
 
-export default function AccountPage() {
+export default function AccountPage({setIsSignedIn}) {
     const [modalVisible, setModalVisible] = useState(false);
     const [limit, setLimit] = useState({});
     const [isLimit, setIslimit] = useState(false);
@@ -108,6 +108,7 @@ export default function AccountPage() {
 
         <Button
             title="LOGOUT"
+            onPress={() => {setIsSignedIn(false)}}
             buttonStyle={{
                 backgroundColor: '#565454',
                 borderRadius: 30,
