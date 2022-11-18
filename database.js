@@ -120,9 +120,9 @@ export const accessories = [
 ];
 
 export const clothingCategories = [
-  { category: "Outerwear", itemList: outerwear },
-  { category: "Tops", itemList: tops },
-  { category: "Accessories", itemList: accessories },
+  { category: "Outerwear", itemList: outerwear, id: 1, name: "Outerwear" },
+  { category: "Tops", itemList: tops, id: 2, "name": "Tops" },
+  { category: "Accessories", itemList: accessories, id: 3, name: "Accessories" },
 ];
 
 export const outfits = outerwear.map((x, idx) => {
