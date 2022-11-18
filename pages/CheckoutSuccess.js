@@ -3,7 +3,7 @@ import { View, StyleSheet, Text } from 'react-native';
 import { Image } from '@rneui/themed';
 import { Button } from '@rneui/themed';
 
-export default () => {
+export default function CheckoutSuccess() {
   
   return (
     <View style={styles.container}>
