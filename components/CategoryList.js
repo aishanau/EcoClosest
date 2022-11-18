@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { PRIMARY_COLOUR } from "../styles";
 import WardrobeCard from "./WardrobeCard";
 
-const CategoryList = ({ category, itemList }) => {
+const CategoryList = ({ navigation, category, itemList }) => {
 
   return (
     <>
@@ -12,12 +12,14 @@ const CategoryList = ({ category, itemList }) => {
       </View>
       <View style={styles.album}>
         <ScrollView horizontal={true}>
-          {itemList.map(({ item, brand, image }, idx) => (
+          {itemList.map((item, idx) => (
             <WardrobeCard
+              navigation={navigation}
               key={idx}
-              item={item}
-              brand={brand}
-              image={image}
+              details={item}
+              // item={item}
+              // brand={brand}
+              // image={image}
             />
           ))}
         </ScrollView>
