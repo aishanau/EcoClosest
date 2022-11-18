@@ -79,8 +79,7 @@ export default function App() {
       <Tabs.Screen
         name="Account"
         // component={AccountPage}
-        children={() => <AccountPage setIsSignedIn={setIsSignedIn}/>}
-
+        children={() => <AccountPage setIsSignedIn={setIsSignedIn} />}
         options={{
           tabBarIcon: ({ size }) => (
             <MaterialCommunityIcons
@@ -107,10 +106,9 @@ export default function App() {
         <RootStack.Navigator initialRouteName="EcoCloset">
           <RootStack.Screen name="Wardrobe" component={WardrobePage} />
           <RootStack.Screen name="Cart" component={SamplePage} />
-          <RootStack.Screen name="Account" 
-          children={() => <AccountPage setIsSignedIn={setIsSignedIn}/>}
-
-
+          <RootStack.Screen
+            name="Account"
+            children={() => <AccountPage setIsSignedIn={setIsSignedIn} />}
           />
           <RootStack.Screen name="Create Outfit" component={CreateOutfitPage} />
           <RootStack.Screen name="Upload Item" component={UploadItem} />
@@ -133,17 +131,15 @@ export default function App() {
       )}
       {!isSignedIn && (
         <RootStack.Navigator initialRouteName="Welcome">
-          <RootStack.Screen
-            name="Welcome"
-            component={Splash} />
-          
+          <RootStack.Screen name="Welcome" component={Splash} />
+
           <RootStack.Screen
             name="Sign Up"
-            children={() => <SignUp setIsSignedIn={setIsSignedIn}/>}
+            children={() => <SignUp setIsSignedIn={setIsSignedIn} />}
           />
           <RootStack.Screen
             name="Login"
-            children={() => <Login setIsSignedIn={setIsSignedIn}/>}
+            children={() => <Login setIsSignedIn={setIsSignedIn} />}
           />
         </RootStack.Navigator>
       )}
