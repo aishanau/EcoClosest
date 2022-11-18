@@ -6,8 +6,8 @@ import OutfitCard from "./OutfitCard";
 const OutfitCategoryList = ({ category, list, navigation, details }) => {
   useEffect(() => {
     console.log("details in OutfitCategoryList ", details);
-  }, [])
-//   useEffect(() => {console.log("list in outfit category list is ", list, category)}, [])  
+  }, []);
+  //   useEffect(() => {console.log("list in outfit category list is ", list, category)}, [])
   return (
     <>
       <View style={styles.titleContainer}>
@@ -16,11 +16,7 @@ const OutfitCategoryList = ({ category, list, navigation, details }) => {
       <View style={styles.album}>
         <ScrollView horizontal={true}>
           {list.map((item, idx) => (
-            <OutfitCard
-              key={idx}
-              navigation={navigation}
-              details={item}
-            />
+            <OutfitCard key={idx} navigation={navigation} details={item} />
           ))}
         </ScrollView>
       </View>

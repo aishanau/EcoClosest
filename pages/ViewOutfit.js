@@ -11,25 +11,6 @@ import WardrobeCard from "../components/WardrobeCard";
 
 const screenWidth = Dimensions.get("window").width;
 
-// export const outfits = outerwear.map((x, idx) => {
-//   return {
-//     name: "Outfit " + idx,
-//     image: tops[idx].image,
-//     outerwear: x,
-//     tops: tops[idx],
-//     accessories: accessories[idx],
-//   };
-// });
-
-// export const outfitCategoryNames = ["Casual", "Party", "Business", "Cocktail"];
-
-// export const outfitsCategoryList = outfitCategoryNames.map((x) => {
-//   return {
-//     category: x,
-//     list: outfits,
-//   };
-// });
-
 const ViewOutfit = ({ navigation, route }) => {
   const [editModeEnabled, setEditModeEnabled] = useState(true);
 
@@ -50,15 +31,18 @@ const ViewOutfit = ({ navigation, route }) => {
           },
         }}
       >
-
-        <View style={{flexDirection: 'row', padding: 10, justifyContent: "space-evenly"}}>
-
+        <View
+          style={{
+            flexDirection: "row",
+            padding: 10,
+            justifyContent: "space-evenly",
+          }}
+        >
           <PrimaryButton
             title={!editModeEnabled ? "Save" : "Edit Outfit"}
             onPress={() => setEditModeEnabled(!editModeEnabled)}
-            containerStyle={{width: "90%"}}
+            containerStyle={{ width: "90%" }}
           />
-
         </View>
         <Input
           disabled={editModeEnabled}
@@ -69,7 +53,7 @@ const ViewOutfit = ({ navigation, route }) => {
           value={outfitName}
         />
 
-        <View style={{padding: 20}}>
+        <View style={{ padding: 20 }}>
           <WardrobeCard
             navigation={navigation}
             details={route.params.details.outerwear}

@@ -6,14 +6,14 @@ import React, { useEffect, useState } from "react";
 const OutfitCard = ({ navigation, details, image, name }) => {
   useEffect(() => {
     console.log("details in OutfitCard ", details);
-  }, [])
+  }, []);
   return (
     <TouchableOpacity
       style={styles.container}
       onPress={() => {
-        console.log("this leads to view outfit page")
+        console.log("this leads to view outfit page");
         navigation.navigate("View Outfit", { details: details });
-        }}
+      }}
     >
       <Card containerStyle={styles.card}>
         <Card.Image
