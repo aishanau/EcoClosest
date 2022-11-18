@@ -17,7 +17,7 @@ import { useIsFocused } from "@react-navigation/native";
 
 const screenWidth = Dimensions.get("window").width;
 
-const ClothesTab = ({navigation, route}) => {
+const ClothesTab = ({ navigation, route }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [image, setImage] = useState(null);
   const [statusCamera, requestPermissionCamera] = ImagePicker.useCameraPermissions();
@@ -28,21 +28,21 @@ const ClothesTab = ({navigation, route}) => {
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
-    
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [3, 3],
-        quality: 1,
-      });
-  
-      console.log(result);
-  
-      if (!result.canceled) {
-        console.log('hello');
-        navigation.navigate('Upload Item', {image: result.assets[0].uri});
-        setModalVisible(false);
-      }
+
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [3, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      console.log("hello");
+      navigation.navigate("Upload Item", { image: result.assets[0].uri });
+      setModalVisible(false);
+    }
   };
 
   const takePhoto = async () => {
@@ -56,7 +56,7 @@ const ClothesTab = ({navigation, route}) => {
     console.log(result);
 
     if (!result.canceled) {
-      navigation.navigate('Upload Item', {image: result.assets[0].uri});
+      navigation.navigate("Upload Item", { image: result.assets[0].uri });
       setModalVisible(false);
     }
   };
@@ -68,7 +68,7 @@ const ClothesTab = ({navigation, route}) => {
     if (statusCamera != null && statusCamera.granted) {
       await takePhoto();
     }
-  }
+  };
 
   const pickImagePermission = async () => {
     if (statusLib == null || !statusLib.granted) {
@@ -77,7 +77,7 @@ const ClothesTab = ({navigation, route}) => {
     if (statusLib != null && statusLib.granted) {
       await pickImage();
     }
-  }
+  };
 
   const addItemEvent = () => {
     console.log("trigger to add item modal, choose upload or take photo");
@@ -100,14 +100,14 @@ const ClothesTab = ({navigation, route}) => {
             <Text style={styles.modalText}>
               Choose an option to upload an image of the new item
             </Text>
-            <View style={{paddingBottom: 10}} >
+            <View style={{ paddingBottom: 10 }}>
               <SecondaryButton
                 containerStyle={styles.modalPrimaryButtonStyle}
                 title={"Upload Image"}
                 onPress={pickImagePermission}
               />
             </View>
-            <View style={{paddingBottom: 10}} >
+            <View style={{ paddingBottom: 10 }}>
               <SecondaryButton
                 containerStyle={styles.modalPrimaryButtonStyle}
                 title={"Take Photo"}

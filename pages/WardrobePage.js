@@ -15,7 +15,7 @@ const screenWidth = Dimensions.get("window").width;
 const WardrobePage = ({navigation, route }) => {
   const [isActive, setIsActive] = useState(true);
 
-  useEffect(() => navigation.setOptions({ title : "Wardrobe" }), []);
+  // useEffect(() => navigation.setOptions({ title : "Wardrobe" }), []);
 
 
   const styles = StyleSheet.create({
@@ -87,8 +87,8 @@ const WardrobePage = ({navigation, route }) => {
         </TouchableOpacity>
       </View>
 
+      {!isActive && <OutfitsTab navigation={navigation} route={route} />}
       {isActive && <ClothesTab route={route} navigation={navigation}/>}
-      {!isActive && <OutfitsTab />}
     </>
   );
 };

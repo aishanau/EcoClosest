@@ -3,21 +3,27 @@ import { Card } from "@rneui/themed";
 import { MAIN_TEXT_COLOUR, SECONDARY_COLOUR } from "../styles";
 import React, { useEffect, useState } from "react";
 
-const OutfitCard = ({ item, image }) => {
+const OutfitCard = ({ navigation, details, image, name }) => {
+  useEffect(() => {
+    console.log("details in OutfitCard ", details);
+  }, []);
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => console.log("this leads to view outfit page")}
+      onPress={() => {
+        console.log("this leads to view outfit page");
+        navigation.navigate("View Outfit", { details: details });
+      }}
     >
       <Card containerStyle={styles.card}>
         <Card.Image
           style={{ padding: 0, width: 120, height: 120, resizeMode: "cover" }}
           source={{
-            uri: image,
+            uri: details.image,
           }}
         />
         <View style={styles.innerCard}>
-          <Text style={styles.item}>{item}</Text>
+          <Text style={styles.item}>{details.name}</Text>
         </View>
       </Card>
     </TouchableOpacity>

@@ -8,7 +8,7 @@ const CategoryList = ({ navigation, category, itemList }) => {
   return (
     <>
       <View style={styles.titleContainer}>
-        <Text style={styles.title}>{category}</Text>
+        <Text style={styles.title}>{category == "" ? "None" : category}</Text>
       </View>
       <View style={styles.album}>
         <ScrollView horizontal={true}>

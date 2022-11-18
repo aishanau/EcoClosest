@@ -1,5 +1,4 @@
-
-import WardrobePage from './pages/WardrobePage';
+import WardrobePage from "./pages/WardrobePage";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -9,6 +8,9 @@ import SamplePage2 from "./components/SamplePage2";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { PRIMARY_COLOUR } from "./styles";
+import CreateOutfitPage from "./pages/CreateOutfitPage";
+
+import PropTypes from "prop-types";
 
 const RootStack = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -23,6 +25,7 @@ import AccountPage from './pages/AccountPage';
 import CategoryPage from './pages/CategoryPage';
 
 import titles from './index.js';
+import ViewOutfit from "./pages/ViewOutfit";
 
 export default function App() {
 
@@ -60,20 +63,21 @@ export default function App() {
   );
 
   const tabBarOptions = {
-    indicatorStyle: { colour: PRIMARY_COLOUR, },
+    indicatorStyle: { colour: PRIMARY_COLOUR },
     activeTintColor: PRIMARY_COLOUR,
     pressOpacity: 1,
-    style: { colour: PRIMARY_COLOUR, },
-
-  }
+    style: { colour: PRIMARY_COLOUR },
+  };
   return (
     <NavigationContainer>
-      <RootStack.Navigator tabBarOptions={tabBarOptions} initialRouteName="EcoCloset">
+      <RootStack.Navigator initialRouteName="EcoCloset">
         <RootStack.Screen name="Wardrobe" component={WardrobePage} />
         <RootStack.Screen name="Cart" component={SamplePage} />
         <RootStack.Screen name="Account" component={SamplePage2} />
+        <RootStack.Screen name="Create Outfit" component={CreateOutfitPage} />
         <RootStack.Screen name="Upload Item" component={UploadItem} />
         <RootStack.Screen name="Item Details" component={ItemDetails} />
+        <RootStack.Screen name="View Outfit" component={ViewOutfit} />
         <RootStack.Screen name="Shop" component={BrowsePage} />
         <RootStack.Screen name="Shop Item" component={ShopItem} />
         <RootStack.Screen name="Results" component={ResultsPage} options={{ title: "Results" }}/>
@@ -83,7 +87,6 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
